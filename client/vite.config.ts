@@ -105,6 +105,15 @@ export default defineConfig(({ command }) => ({
     minify: 'terser',
     rollupOptions: {
       preserveEntrySignatures: 'strict',
+      external: (id: string) => {
+        // Mark peer dependencies from @librechat/client as external
+        return (
+          id === 'framer-motion' ||
+          id.includes('@librechat/client') ||
+          id.includes('@librechat/data-provider') ||
+          id.includes('@librechat/data-schemas')
+        );
+      },
       output: {
         manualChunks(id: string) {
           const normalizedId = id.replace(/\\/g, '/');
