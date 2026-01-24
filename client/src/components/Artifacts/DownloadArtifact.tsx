@@ -41,11 +41,7 @@ const DownloadArtifact = ({ artifact }: { artifact: Artifact }) => {
       onClick={handleDownload}
       aria-label={localize('com_ui_download_artifact')}
     >
-      {isDownloaded ? (
-        <CircleCheckBig size={16} aria-hidden="true" />
-      ) : (
-        <Download size={16} aria-hidden="true" />
-      )}
+      {isDownloaded ? <CircleCheckBig size={16} /> : <Download size={16} />}
     </Button>
   );
 };

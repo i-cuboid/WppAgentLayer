@@ -46,6 +46,9 @@ export class MCPServersInitializer {
 
     if (!isFirstCallThisProcess && (await statusCache.isInitialized())) return;
 
+    /** Store raw configs immediately so they're available even if initialization fails/is slow */
+    registry.setRawConfigs(rawConfigs);
+
     if (await isLeader()) {
       // Leader performs initialization - always reset on first call
       await statusCache.reset();

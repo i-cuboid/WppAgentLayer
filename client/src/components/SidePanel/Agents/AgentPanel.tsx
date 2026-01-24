@@ -46,7 +46,7 @@ function getUpdateToastMessage(
   if (noVersionChange) {
     return localize('com_ui_no_changes');
   }
-  return localize('com_assistants_update_success_name', { name: name ?? localize('com_ui_agent') });
+  return `${localize('com_assistants_update_success')} ${name ?? localize('com_ui_agent')}`;
 }
 
 /**
@@ -217,7 +217,7 @@ export default function AgentPanel() {
 
   const { onSelect: onSelectAgent } = useSelectAgent();
 
-  const modelsQuery = useGetModelsQuery({ refetchOnMount: 'always' });
+  const modelsQuery = useGetModelsQuery();
   const basicAgentQuery = useGetAgentByIdQuery(current_agent_id);
 
   const { hasPermission, isLoading: permissionsLoading } = useResourcePermissions(
@@ -306,7 +306,9 @@ export default function AgentPanel() {
           (key) =>
             !isAssistantsEndpoint(key) &&
             (allowedProviders.size > 0 ? allowedProviders.has(key) : true) &&
-            key !== EModelEndpoint.agents,
+            key !== EModelEndpoint.agents &&
+            key !== EModelEndpoint.chatGPTBrowser &&
+            key !== EModelEndpoint.gptPlugins,
         )
         .map((provider) => createProviderOption(provider)),
     [endpointsConfig, allowedProviders],
@@ -476,7 +478,7 @@ export default function AgentPanel() {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="scrollbar-gutter-stable h-auto w-full flex-shrink-0 overflow-y-hidden overflow-x-visible"
+        className="scrollbar-gutter-stable h-auto w-full flex-shrink-0 overflow-x-hidden"
         aria-label="Agent configuration form"
       >
         <div className="mx-1 mt-2 flex w-full flex-wrap gap-2">
@@ -502,10 +504,20 @@ export default function AgentPanel() {
                   setCurrentAgentId(undefined);
                 }}
                 disabled={agentQuery.isInitialLoading}
-                aria-label={localize('com_ui_create_new_agent')}
+                aria-label={
+                  localize('com_ui_create') +
+                  ' ' +
+                  localize('com_ui_new') +
+                  ' ' +
+                  localize('com_ui_agent')
+                }
               >
-                <Plus className="mr-1 h-4 w-4" aria-hidden="true" />
-                {localize('com_ui_create_new_agent')}
+                <Plus className="mr-1 h-4 w-4" />
+                {localize('com_ui_create') +
+                  ' ' +
+                  localize('com_ui_new') +
+                  ' ' +
+                  localize('com_ui_agent')}
               </Button>
               <Button
                 variant="submit"
@@ -514,7 +526,7 @@ export default function AgentPanel() {
                   e.preventDefault();
                   handleSelectAgent();
                 }}
-                aria-label={localize('com_ui_select_agent')}
+                aria-label={localize('com_ui_select') + ' ' + localize('com_ui_agent')}
               >
                 {localize('com_ui_select')}
               </Button>

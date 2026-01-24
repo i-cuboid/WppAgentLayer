@@ -65,6 +65,7 @@ export default function ArtifactTabs({
           files={files}
           fileKey={fileKey}
           template={template}
+          isMermaid={isMermaid}
           previewRef={previewRef}
           sharedProps={sharedProps}
           currentCode={currentCode}

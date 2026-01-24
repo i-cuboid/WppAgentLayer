@@ -6,7 +6,7 @@ import { ResizablePanel, ResizablePanelGroup, useMediaQuery } from '@librechat/c
 import type { ImperativePanelHandle } from 'react-resizable-panels';
 import { useGetStartupConfig } from '~/data-provider';
 import ArtifactsPanel from './ArtifactsPanel';
-import { normalizeLayout, cn } from '~/utils';
+import { normalizeLayout } from '~/utils';
 import SidePanel from './SidePanel';
 import store from '~/store';
 
@@ -147,13 +147,11 @@ const SidePanelGroup = memo(
         {artifacts != null && isSmallScreen && (
           <div className="fixed inset-0 z-[100]">{artifacts}</div>
         )}
-        {!hideSidePanel && interfaceConfig.sidePanel === true && (
-          <button
-            onClick={handleClosePanel}
-            aria-label="Close right side panel"
-            className={cn('sidenav-mask', !isCollapsed ? 'active' : '')}
-          />
-        )}
+        <button
+          aria-label="Close right side panel"
+          className={`nav-mask ${!isCollapsed ? 'active' : ''}`}
+          onClick={handleClosePanel}
+        />
       </>
     );
   },

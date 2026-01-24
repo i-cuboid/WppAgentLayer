@@ -92,7 +92,7 @@ describe('fetchModels', () => {
       headers: customHeaders,
     });
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
+    expect(axios.get).toHaveBeenCalledWith(
       expect.stringContaining('https://api.test.com/models'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -113,7 +113,7 @@ describe('fetchModels', () => {
       headers: null,
     });
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
+    expect(axios.get).toHaveBeenCalledWith(
       expect.stringContaining('https://api.test.com/models'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -132,7 +132,7 @@ describe('fetchModels', () => {
       headers: undefined,
     });
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
+    expect(axios.get).toHaveBeenCalledWith(
       expect.stringContaining('https://api.test.com/models'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -524,7 +524,7 @@ describe('getAnthropicModels', () => {
     delete process.env.ANTHROPIC_MODELS;
     process.env.ANTHROPIC_API_KEY = 'test-anthropic-key';
 
-    mockedAxios.get.mockResolvedValue({
+    axios.get.mockResolvedValue({
       data: {
         data: [{ id: 'claude-3' }, { id: 'claude-4' }],
       },
@@ -537,7 +537,7 @@ describe('getAnthropicModels', () => {
       name: EModelEndpoint.anthropic,
     });
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
+    expect(axios.get).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({
         headers: {
@@ -553,7 +553,7 @@ describe('getAnthropicModels', () => {
       'X-Custom-Header': 'custom-value',
     };
 
-    mockedAxios.get.mockResolvedValue({
+    axios.get.mockResolvedValue({
       data: {
         data: [{ id: 'claude-3' }],
       },
@@ -567,7 +567,7 @@ describe('getAnthropicModels', () => {
       headers: customHeaders,
     });
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
+    expect(axios.get).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({
         headers: {

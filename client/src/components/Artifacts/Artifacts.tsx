@@ -257,11 +257,7 @@ export default function Artifacts() {
                   {isRefreshing ? (
                     <Spinner size={16} />
                   ) : (
-                    <RefreshCw
-                      size={16}
-                      className="transition-transform duration-200"
-                      aria-hidden="true"
-                    />
+                    <RefreshCw size={16} className="transition-transform duration-200" />
                   )}
                 </Button>
               )}
@@ -288,7 +284,7 @@ export default function Artifacts() {
                 onClick={closeArtifacts}
                 aria-label={localize('com_ui_close')}
               >
-                <X size={16} aria-hidden="true" />
+                <X size={16} />
               </Button>
             </div>
           </div>

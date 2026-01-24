@@ -118,7 +118,7 @@ const ALLOWED_BODY_FIELDS = ['conversationId', 'parentMessageId', 'messageId'] a
  * @param isHeader - Whether this value will be used in an HTTP header
  * @returns The processed string with placeholders replaced (and encoded if necessary)
  */
-function processUserPlaceholders(value: string, user?: IUser, isHeader: boolean = false): string {
+function processUserPlaceholders(value: string, user?: IUser): string {
   if (!user || typeof value !== 'string') {
     return value;
   }
@@ -228,7 +228,7 @@ function processSingleValue({
     }
   }
 
-  value = processUserPlaceholders(value, user, isHeader);
+  value = processUserPlaceholders(value, user);
 
   const openidTokenInfo = extractOpenIDTokenInfo(user);
   if (openidTokenInfo && isOpenIDTokenValid(openidTokenInfo)) {

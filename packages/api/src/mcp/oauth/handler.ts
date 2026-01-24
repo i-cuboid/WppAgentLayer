@@ -2,6 +2,8 @@ import { randomBytes } from 'crypto';
 import { logger } from '@librechat/data-schemas';
 import { FetchLike } from '@modelcontextprotocol/sdk/shared/transport';
 import { OAuthMetadataSchema } from '@modelcontextprotocol/sdk/shared/auth.js';
+import { FetchLike } from '@modelcontextprotocol/sdk/shared/transport';
+import { OAuthMetadataSchema } from '@modelcontextprotocol/sdk/shared/auth.js';
 import {
   registerClient,
   startAuthorization,
@@ -393,6 +395,23 @@ export class MCPOAuthHandler {
           codeChallengeMethodsSupported = ['S256', 'plain'];
         }
 
+
+        const skipCodeChallengeCheck =
+          config?.skip_code_challenge_check === true ||
+          process.env.MCP_SKIP_CODE_CHALLENGE_CHECK === 'true';
+        let codeChallengeMethodsSupported: string[];
+
+        if (config?.code_challenge_methods_supported !== undefined) {
+          codeChallengeMethodsSupported = config.code_challenge_methods_supported;
+        } else if (skipCodeChallengeCheck) {
+          codeChallengeMethodsSupported = ['S256', 'plain'];
+          logger.debug(
+            `[MCPOAuth] Code challenge check skip enabled, forcing S256 support for ${serverName}`,
+          );
+        } else {
+          codeChallengeMethodsSupported = ['S256', 'plain'];
+        }
+
         /** Metadata based on pre-configured settings */
         let tokenEndpointAuthMethod: string;
         if (!config.client_secret) {
@@ -426,6 +445,7 @@ export class MCPOAuthHandler {
           token_endpoint_auth_methods_supported:
             config?.token_endpoint_auth_methods_supported ?? defaultTokenAuthMethods,
           response_types_supported: config?.response_types_supported ?? ['code'],
+          code_challenge_methods_supported: codeChallengeMethodsSupported,
           code_challenge_methods_supported: codeChallengeMethodsSupported,
         };
         logger.debug(`[MCPOAuth] metadata for "${serverName}": ${JSON.stringify(metadata)}`);
@@ -626,6 +646,10 @@ export class MCPOAuthHandler {
         fetchFn: this.createOAuthFetch(oauthHeaders, metadata.clientInfo),
       });
 
+      logger.debug('[MCPOAuth] Token exchange successful', {
+        flowId,
+        has_access_token: !!tokens.access_token,
+        has_refresh_token: !!tokens.refresh_token,
       logger.debug('[MCPOAuth] Token exchange successful', {
         flowId,
         has_access_token: !!tokens.access_token,

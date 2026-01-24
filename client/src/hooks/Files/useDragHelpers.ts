@@ -8,7 +8,6 @@ import {
   Tools,
   QueryKeys,
   Constants,
-  inferMimeType,
   EToolResources,
   EModelEndpoint,
   mergeFileConfig,
@@ -119,9 +118,7 @@ export default function useDragHelpers() {
       }
 
       /** Determine if dragged files are all images (enables the base image option) */
-      const allImages = item.files.every((f) =>
-        inferMimeType(f.name, f.type)?.startsWith('image/'),
-      );
+      const allImages = item.files.every((f) => f.type?.startsWith('image/'));
 
       const shouldShowModal =
         allImages ||

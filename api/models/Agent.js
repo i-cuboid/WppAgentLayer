@@ -17,33 +17,11 @@ const {
   removeAgentIdsFromProject,
   addAgentIdsToProject,
 } = require('./Project');
-const { removeAllPermissions } = require('~/server/services/PermissionService');
+// Lazy-load PermissionService to break circular dependency
+// const { removeAllPermissions } = require('~/server/services/PermissionService');
 const { getMCPServerTools } = require('~/server/services/Config');
-const { Agent, AclEntry, User } = require('~/db/models');
+const { Agent, AclEntry } = require('~/db/models');
 const { getActions } = require('./Action');
-
-/**
- * Extracts unique MCP server names from tools array
- * Tools format: "toolName_mcp_serverName" or "sys__server__sys_mcp_serverName"
- * @param {string[]} tools - Array of tool identifiers
- * @returns {string[]} Array of unique MCP server names
- */
-const extractMCPServerNames = (tools) => {
-  if (!tools || !Array.isArray(tools)) {
-    return [];
-  }
-  const serverNames = new Set();
-  for (const tool of tools) {
-    if (!tool || !tool.includes(mcp_delimiter)) {
-      continue;
-    }
-    const parts = tool.split(mcp_delimiter);
-    if (parts.length >= 2) {
-      serverNames.add(parts[parts.length - 1]);
-    }
-  }
-  return Array.from(serverNames);
-};
 
 /**
  * Create an agent with the provided data.
@@ -578,7 +556,7 @@ const removeAgentResourceFiles = async ({ agent_id, files }) => {
 };
 
 /**
- * Deletes an agent based on the provided ID.
+ * Deletes a single agent based on the provided search parameters and removes it from all projects.
  *
  * @param {Object} searchParameter - The search parameters to find the agent to delete.
  * @param {string} searchParameter.id - The ID of the agent to delete.
@@ -586,6 +564,9 @@ const removeAgentResourceFiles = async ({ agent_id, files }) => {
  * @returns {Promise<void>} Resolves when the agent has been successfully deleted.
  */
 const deleteAgent = async (searchParameter) => {
+  // Lazy-load PermissionService to break circular dependency
+  const { removeAllPermissions } = require('~/server/services/PermissionService');
+  
   const agent = await Agent.findOneAndDelete(searchParameter);
   if (agent) {
     await removeAgentFromAllProjects(agent.id);
@@ -634,15 +615,6 @@ const deleteUserAgents = async (userId) => {
       resourceType: ResourceType.AGENT,
       resourceId: { $in: agentObjectIds },
     });
-
-    try {
-      await User.updateMany(
-        { 'favorites.agentId': { $in: agentIds } },
-        { $pull: { favorites: { agentId: { $in: agentIds } } } },
-      );
-    } catch (error) {
-      logger.error('[deleteUserAgents] Error removing agents from user favorites', error);
-    }
 
     await Agent.deleteMany({ author: userId });
   } catch (error) {
@@ -915,6 +887,7 @@ module.exports = {
   updateAgent,
   deleteAgent,
   deleteUserAgents,
+  getListAgents,
   revertAgentVersion,
   updateAgentProjects,
   countPromotedAgents,

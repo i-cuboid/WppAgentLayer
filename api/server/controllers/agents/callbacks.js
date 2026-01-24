@@ -145,17 +145,16 @@ function checkIfLastAgent(last_agent_id, langgraph_node) {
 }
 
 /**
- * Helper to emit events either to res (standard mode) or to job emitter (resumable mode).
- * @param {ServerResponse} res - The server response object
- * @param {string | null} streamId - The stream ID for resumable mode, or null for standard mode
- * @param {Object} eventData - The event data to send
+ * @deprecated Agent Chain helper
+ * @param {string | undefined} [last_agent_id]
+ * @param {string | undefined} [langgraph_node]
+ * @returns {boolean}
  */
-function emitEvent(res, streamId, eventData) {
-  if (streamId) {
-    GenerationJobManager.emitChunk(streamId, eventData);
-  } else {
-    sendEvent(res, eventData);
+function checkIfLastAgent(last_agent_id, langgraph_node) {
+  if (!last_agent_id || !langgraph_node) {
+    return false;
   }
+  return langgraph_node?.endsWith(last_agent_id);
 }
 
 /**
@@ -194,9 +193,9 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (data?.stepDetails.type === StepTypes.TOOL_CALLS) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         } else {
@@ -223,9 +222,9 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (data?.delta.type === StepTypes.TOOL_CALLS) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }
@@ -241,9 +240,9 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (data?.result != null) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }
@@ -259,7 +258,7 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }
@@ -275,7 +274,7 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
-          emitEvent(res, streamId, { event, data });
+          sendEvent(res, { event, data });
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }

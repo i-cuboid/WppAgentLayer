@@ -172,7 +172,6 @@ describe('socialLogin', () => {
 
       /** Verify both searches happened */
       expect(findUser).toHaveBeenNthCalledWith(1, { googleId: googleId });
-      /** Email passed as-is; findUser implementation handles case normalization */
       expect(findUser).toHaveBeenNthCalledWith(2, { email: email });
       expect(findUser).toHaveBeenCalledTimes(2);
 

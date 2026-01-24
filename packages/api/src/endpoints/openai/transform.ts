@@ -5,6 +5,7 @@ import type * as t from '~/types';
 import { knownOpenAIParams } from './llm';
 
 const anthropicExcludeParams = new Set(['anthropicApiUrl']);
+const googleExcludeParams = new Set(['safetySettings', 'location', 'baseUrl', 'customHeaders']);
 const googleExcludeParams = new Set([
   'safetySettings',
   'location',
@@ -60,6 +61,14 @@ export function transformToOpenAIConfig({
   } else if (isGoogle) {
     excludeParams = googleExcludeParams;
   }
+  const isGoogle = fromEndpoint === EModelEndpoint.google;
+
+  let excludeParams = new Set<string>();
+  if (isAnthropic) {
+    excludeParams = anthropicExcludeParams;
+  } else if (isGoogle) {
+    excludeParams = googleExcludeParams;
+  }
 
   for (const [key, value] of Object.entries(llmConfig)) {
     if (value === undefined || value === null) {
@@ -98,6 +107,11 @@ export function transformToOpenAIConfig({
         continue;
       }
 
+      /** Skip web_search - it's handled separately as a tool */
+      if (key === 'web_search') {
+        continue;
+      }
+
       if (knownOpenAIParams.has(key)) {
         (openAIConfig as Record<string, unknown>)[key] = value;
       } else {
@@ -118,11 +132,24 @@ export function transformToOpenAIConfig({
         return;
       }
 
+      /** Skip web_search - handled separately */
+      if (param === 'web_search') {
+        return;
+      }
+
       if (param in openAIConfig) {
         delete openAIConfig[param as keyof t.OAIClientOptions];
       }
       if (openAIConfig.modelKwargs && param in openAIConfig.modelKwargs) {
         delete openAIConfig.modelKwargs[param];
+      }
+    });
+
+    /** Clean up empty modelKwargs after dropParams processing */
+    if (openAIConfig.modelKwargs && Object.keys(openAIConfig.modelKwargs).length === 0) {
+      delete openAIConfig.modelKwargs;
+    }
+  }
       }
     });
 

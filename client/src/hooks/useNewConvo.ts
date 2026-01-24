@@ -8,9 +8,7 @@ import {
   Permissions,
   EModelEndpoint,
   isParamEndpoint,
-  PermissionTypes,
   getEndpointField,
-  isAgentsEndpoint,
   LocalStorageKeys,
   isEphemeralAgentId,
   isAssistantsEndpoint,
@@ -25,7 +23,6 @@ import type {
 import type { AssistantListItem } from '~/common';
 import {
   updateLastSelectedModel,
-  getLocalStorageItems,
   getDefaultModelSpec,
   getDefaultEndpoint,
   getModelSpecPreset,
@@ -37,7 +34,6 @@ import useAssistantListMap from './Assistants/useAssistantListMap';
 import { useResetChatBadges } from './useChatBadges';
 import { useApplyModelSpecEffects } from './Agents';
 import { usePauseGlobalAudio } from './Audio';
-import { useHasAccess } from '~/hooks';
 import store from '~/store';
 
 const useNewConvo = (index = 0) => {

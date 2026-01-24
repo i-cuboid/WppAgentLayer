@@ -17,7 +17,6 @@ const {
   ImageVisionTool,
   openapiToFunction,
   AgentCapabilities,
-  isEphemeralAgentId,
   validateActionDomain,
   defaultAgentCapabilities,
   validateAndParseOpenAPISpec,
