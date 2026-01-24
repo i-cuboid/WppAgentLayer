@@ -160,5 +160,9 @@
       "admin/",
       "packages/"
     ]
+  },
+  "dependencies": {
+    "@opentelemetry/exporter-trace-otlp-http": "^0.211.0",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
