@@ -381,6 +381,7 @@ router.post('/', async (req, res) => {
       return await processFileUpload({ req, res, metadata });
     }
 
+<<<<<<< HEAD
     /**
      * Check agent permissions for permanent agent file uploads (not message attachments).
      * Message attachments (message_file=true) are temporary files for a single conversation
@@ -425,6 +426,8 @@ router.post('/', async (req, res) => {
       }
     }
 
+=======
+>>>>>>> main
     return await processAgentFileUpload({ req, res, metadata });
   } catch (error) {
     let message = 'Error processing file';

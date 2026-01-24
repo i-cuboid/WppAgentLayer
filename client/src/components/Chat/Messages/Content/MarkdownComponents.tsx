@@ -2,7 +2,10 @@ import React, { memo, useMemo, useRef, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useToastContext } from '@librechat/client';
 import { PermissionTypes, Permissions, apiBaseUrl } from 'librechat-data-provider';
+<<<<<<< HEAD
 import MermaidErrorBoundary from '~/components/Messages/Content/MermaidErrorBoundary';
+=======
+>>>>>>> main
 import CodeBlock from '~/components/Messages/Content/CodeBlock';
 import Mermaid from '~/components/Messages/Content/Mermaid';
 import useHasAccess from '~/hooks/Roles/useHasAccess';

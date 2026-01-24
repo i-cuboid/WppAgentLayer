@@ -145,6 +145,7 @@ function checkIfLastAgent(last_agent_id, langgraph_node) {
 }
 
 /**
+<<<<<<< HEAD
  * Helper to emit events either to res (standard mode) or to job emitter (resumable mode).
  * @param {ServerResponse} res - The server response object
  * @param {string | null} streamId - The stream ID for resumable mode, or null for standard mode
@@ -159,6 +160,8 @@ function emitEvent(res, streamId, eventData) {
 }
 
 /**
+=======
+>>>>>>> main
  * Get default handlers for stream events.
  * @param {Object} options - The options object.
  * @param {ServerResponse} options.res - The server response object.
@@ -194,9 +197,15 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (data?.stepDetails.type === StepTypes.TOOL_CALLS) {
+<<<<<<< HEAD
           emitEvent(res, streamId, { event, data });
         } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
           emitEvent(res, streamId, { event, data });
+=======
+          sendEvent(res, { event, data });
+        } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
+          sendEvent(res, { event, data });
+>>>>>>> main
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         } else {
@@ -223,9 +232,15 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (data?.delta.type === StepTypes.TOOL_CALLS) {
+<<<<<<< HEAD
           emitEvent(res, streamId, { event, data });
         } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
           emitEvent(res, streamId, { event, data });
+=======
+          sendEvent(res, { event, data });
+        } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
+          sendEvent(res, { event, data });
+>>>>>>> main
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }
@@ -241,9 +256,15 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (data?.result != null) {
+<<<<<<< HEAD
           emitEvent(res, streamId, { event, data });
         } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
           emitEvent(res, streamId, { event, data });
+=======
+          sendEvent(res, { event, data });
+        } else if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
+          sendEvent(res, { event, data });
+>>>>>>> main
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }
@@ -259,7 +280,11 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
+<<<<<<< HEAD
           emitEvent(res, streamId, { event, data });
+=======
+          sendEvent(res, { event, data });
+>>>>>>> main
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }
@@ -275,7 +300,11 @@ function getDefaultHandlers({
        */
       handle: (event, data, metadata) => {
         if (checkIfLastAgent(metadata?.last_agent_id, metadata?.langgraph_node)) {
+<<<<<<< HEAD
           emitEvent(res, streamId, { event, data });
+=======
+          sendEvent(res, { event, data });
+>>>>>>> main
         } else if (!metadata?.hide_sequential_outputs) {
           emitEvent(res, streamId, { event, data });
         }

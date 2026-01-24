@@ -15,6 +15,10 @@ const {
 } = require('./Project');
 const { removeAllPermissions } = require('~/server/services/PermissionService');
 const { PromptGroup, Prompt, AclEntry } = require('~/db/models');
+<<<<<<< HEAD
+=======
+const { escapeRegExp } = require('~/server/utils');
+>>>>>>> main
 
 /**
  * Create a pipeline for the aggregation to get prompt groups

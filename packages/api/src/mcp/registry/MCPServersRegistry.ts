@@ -12,6 +12,7 @@ import { cacheConfig } from '~/cache/cacheConfig';
  * Central registry for managing MCP server configurations.
  * Authoritative source of truth for all MCP servers provided by LibreChat.
  *
+<<<<<<< HEAD
  * Uses a two-repository architecture:
  * - Cache Repository: Stores YAML-defined configs loaded at startup (in-memory or Redis-backed)
  * - DB Repository: Stores dynamic configs created at runtime (not yet implemented)
@@ -20,6 +21,26 @@ import { cacheConfig } from '~/cache/cacheConfig';
  */
 export class MCPServersRegistry {
   private static instance: MCPServersRegistry;
+=======
+ * Provides a unified interface for retrieving server configs with proper fallback hierarchy:
+ * checks shared app servers first, then shared user servers, then private user servers.
+ * Falls back to raw config when servers haven't been initialized yet or failed to initialize.
+ * Handles server lifecycle operations including adding, removing, and querying configurations.
+ */
+class MCPServersRegistry {
+  public readonly sharedAppServers = ServerConfigsCacheFactory.create('App', false);
+  public readonly sharedUserServers = ServerConfigsCacheFactory.create('User', false);
+  private readonly privateUserServers: Map<string | undefined, ServerConfigsCache> = new Map();
+  private rawConfigs: t.MCPServers = {};
+
+  /**
+   * Stores the raw MCP configuration as a fallback when servers haven't been initialized yet.
+   * Should be called during initialization before inspecting servers.
+   */
+  public setRawConfigs(configs: t.MCPServers): void {
+    this.rawConfigs = configs;
+  }
+>>>>>>> main
 
   private readonly dbConfigsRepo: IServerConfigsRepositoryInterface;
   private readonly cacheConfigsRepo: IServerConfigsRepositoryInterface;
@@ -91,6 +112,7 @@ export class MCPServersRegistry {
       return configFromCache;
     }
 
+<<<<<<< HEAD
     const configFromDB = await this.dbConfigsRepo.get(serverName, userId);
     await this.readThroughCache.set(cacheKey, configFromDB);
     return configFromDB;
@@ -180,6 +202,34 @@ export class MCPServersRegistry {
     }
     await configRepo.update(serverName, parsedConfig, userId);
     return parsedConfig;
+=======
+    /** Fallback to raw config if server hasn't been initialized yet */
+    const rawConfig = this.rawConfigs[serverName];
+    if (rawConfig) return rawConfig as t.ParsedServerConfig;
+
+    return undefined;
+  }
+
+  public async getAllServerConfigs(userId?: string): Promise<Record<string, t.ParsedServerConfig>> {
+    const registryConfigs = {
+      ...(await this.sharedAppServers.getAll()),
+      ...(await this.sharedUserServers.getAll()),
+      ...((await this.privateUserServers.get(userId)?.getAll()) ?? {}),
+    };
+
+    /** Include all raw configs, but registry configs take precedence (they have inspection data) */
+    const allConfigs: Record<string, t.ParsedServerConfig> = {};
+    for (const serverName in this.rawConfigs) {
+      allConfigs[serverName] = this.rawConfigs[serverName] as t.ParsedServerConfig;
+    }
+
+    /** Override with registry configs where available (they have richer data) */
+    for (const serverName in registryConfigs) {
+      allConfigs[serverName] = registryConfigs[serverName];
+    }
+
+    return allConfigs;
+>>>>>>> main
   }
 
   // TODO: This is currently used to determine if a server requires OAuth. However, this info can

@@ -258,7 +258,15 @@
   "com_endpoint_custom_name": "自定义名称",
   "com_endpoint_default": "默认值",
   "com_endpoint_default_blank": "默认值：空白",
+<<<<<<< HEAD
   "com_endpoint_default_with_num": "默认值：{{0}}",
+=======
+  "com_endpoint_default_empty": "默认值：空",
+  "com_endpoint_default_with_num": "默认值：{{0}}",
+  "com_endpoint_deprecated": "已弃用",
+  "com_endpoint_deprecated_info": "此端点已被弃用并可能在未来的版本中删除，请改用智能体端点",
+  "com_endpoint_deprecated_info_a11y": "此插件端点已被弃用并可能在未来的版本中删除，请改用智能体端点",
+>>>>>>> main
   "com_endpoint_disable_streaming": "禁用流式响应并一次性接收完整的响应。对于像 o3 这样需要进行组织验证才能进行流式响应的模型非常有用。",
   "com_endpoint_disable_streaming_label": "禁用流式响应",
   "com_endpoint_examples": " 预设",
@@ -611,6 +619,7 @@
   "com_ui_action_button": "操作按钮",
   "com_ui_active": "活动",
   "com_ui_add": "添加",
+  "com_ui_add_api_key": "添加 API 密钥",
   "com_ui_add_mcp": "添加 MCP",
   "com_ui_add_mcp_server": "添加 MCP 服务器",
   "com_ui_add_model_preset": "添加一个模型或预设以获得额外的响应",

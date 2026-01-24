@@ -109,6 +109,7 @@ const Image = ({
           className,
         )}
       >
+<<<<<<< HEAD
         <LazyLoadImage
           alt={altText}
           onLoad={handleImageLoad}
@@ -143,6 +144,48 @@ const Image = ({
           triggerRef={triggerRef}
         />
       )}
+=======
+        <button
+          type="button"
+          aria-label={`View ${altText} in dialog`}
+          onClick={() => setIsOpen(true)}
+          className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <LazyLoadImage
+            alt={altText}
+            onLoad={handleImageLoad}
+            visibleByDefault={true}
+            className={cn(
+              'opacity-100 transition-opacity duration-100',
+              isLoaded ? 'opacity-100' : 'opacity-0',
+            )}
+            src={absoluteImageUrl}
+            style={{
+              width: `${scaledWidth}`,
+              height: 'auto',
+              color: 'transparent',
+              display: 'block',
+            }}
+            placeholder={
+              <Skeleton
+                className={cn('h-auto w-full', `h-[${scaledHeight}] w-[${scaledWidth}]`)}
+                aria-label="Loading image"
+                aria-busy="true"
+              />
+            }
+          />
+        </button>
+        {isLoaded && (
+          <DialogImage
+            isOpen={isOpen}
+            onOpenChange={setIsOpen}
+            src={absoluteImageUrl}
+            downloadImage={downloadImage}
+            args={args}
+          />
+        )}
+      </div>
+>>>>>>> main
     </div>
   );
 };

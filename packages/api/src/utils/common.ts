@@ -48,6 +48,7 @@ export function optionalChainWithEmptyCheck(
   }
   return values[values.length - 1];
 }
+<<<<<<< HEAD
 
 /**
  * Escapes special characters in a string for use in a regular expression.
@@ -57,3 +58,5 @@ export function optionalChainWithEmptyCheck(
 export function escapeRegExp(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+=======
+>>>>>>> main

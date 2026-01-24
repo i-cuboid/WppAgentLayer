@@ -49,6 +49,16 @@ describe('ServerConfigsCacheRedis Integration Tests', () => {
 
     // Wait for connection and topology discovery to complete
     await redisClients.keyvRedisClientReady;
+<<<<<<< HEAD
+=======
+
+    // Clear any existing leader key to ensure clean state
+    await keyvRedisClient.del(LeaderElection.LEADER_KEY);
+
+    // Become leader so we can perform write operations (using default election instance)
+    const isLeader = await checkIsLeader();
+    expect(isLeader).toBe(true);
+>>>>>>> main
   });
 
   beforeEach(() => {

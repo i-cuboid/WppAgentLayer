@@ -70,6 +70,7 @@ const DragDropModal = ({ onOptionSelect, setShowModal, files, isVisible }: DragD
       currentProvider === EModelEndpoint.azureOpenAI && useResponsesApi;
 
     // Check if provider supports document upload
+<<<<<<< HEAD
     if (
       isDocumentSupportedProvider(endpointType) ||
       isDocumentSupportedProvider(currentProvider) ||
@@ -91,6 +92,19 @@ const DragDropModal = ({ onOptionSelect, setShowModal, files, isVisible }: DragD
             const type = getFileType(file);
             return type?.startsWith('image/') || type === 'application/pdf';
           });
+=======
+    if (isDocumentSupportedProvider(endpointType) || isDocumentSupportedProvider(currentProvider)) {
+      const isGoogleProvider = currentProvider === EModelEndpoint.google;
+      const validFileTypes = isGoogleProvider
+        ? files.every(
+            (file) =>
+              file.type?.startsWith('image/') ||
+              file.type?.startsWith('video/') ||
+              file.type?.startsWith('audio/') ||
+              file.type === 'application/pdf',
+          )
+        : files.every((file) => file.type?.startsWith('image/') || file.type === 'application/pdf');
+>>>>>>> main
 
       _options.push({
         label: localize('com_ui_upload_provider'),

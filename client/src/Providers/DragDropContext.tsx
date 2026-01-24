@@ -1,8 +1,14 @@
 import React, { createContext, useContext, useMemo } from 'react';
+<<<<<<< HEAD
 import { getEndpointField, isAgentsEndpoint } from 'librechat-data-provider';
 import type { EModelEndpoint } from 'librechat-data-provider';
 import { useGetEndpointsQuery, useGetAgentByIdQuery } from '~/data-provider';
 import { useAgentsMapContext } from './AgentsMapContext';
+=======
+import { getEndpointField } from 'librechat-data-provider';
+import type { EModelEndpoint } from 'librechat-data-provider';
+import { useGetEndpointsQuery } from '~/data-provider';
+>>>>>>> main
 import { useChatContext } from './ChatContext';
 
 interface DragDropContextValue {

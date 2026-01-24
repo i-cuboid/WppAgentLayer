@@ -157,6 +157,7 @@ export function getGoogleConfig(
 
   let enableWebSearch = web_search;
 
+<<<<<<< HEAD
   const llmConfig: GoogleClientOptions | VertexAIClientOptions = removeNullishValues(
     {
       ...(modelOptions || {}),
@@ -169,6 +170,17 @@ export function getGoogleConfig(
     },
     true,
   );
+=======
+  const llmConfig: GoogleClientOptions | VertexAIClientOptions = removeNullishValues({
+    ...(modelOptions || {}),
+    model: modelOptions?.model ?? '',
+    maxRetries: 2,
+    topP: modelOptions?.topP ?? undefined,
+    topK: modelOptions?.topK ?? undefined,
+    temperature: modelOptions?.temperature ?? undefined,
+    maxOutputTokens: modelOptions?.maxOutputTokens ?? undefined,
+  });
+>>>>>>> main
 
   /** Used only for Safety Settings */
   llmConfig.safetySettings = getSafetySettings(llmConfig.model);

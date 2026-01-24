@@ -542,7 +542,11 @@ describe('MCP Routes', () => {
     });
 
     it('should use original flow state credentials when storing tokens', async () => {
+<<<<<<< HEAD
       // mockRegistryInstance is defined at the top of the file
+=======
+      const { mcpServersRegistry } = require('@librechat/api');
+>>>>>>> main
       const mockFlowManager = {
         getFlowState: jest.fn(),
         completeFlow: jest.fn().mockResolvedValue(),
@@ -574,7 +578,11 @@ describe('MCP Routes', () => {
       MCPOAuthHandler.getFlowState.mockResolvedValue(flowState);
       MCPOAuthHandler.completeOAuthFlow.mockResolvedValue(mockTokens);
       MCPTokenStorage.storeTokens.mockResolvedValue();
+<<<<<<< HEAD
       mockRegistryInstance.getServerConfig.mockResolvedValue({});
+=======
+      mcpServersRegistry.getServerConfig.mockResolvedValue({});
+>>>>>>> main
       getLogStores.mockReturnValue({});
       require('~/config').getFlowStateManager.mockReturnValue(mockFlowManager);
 
@@ -593,10 +601,16 @@ describe('MCP Routes', () => {
         code: 'test-auth-code',
         state: 'test-flow-id',
       });
+<<<<<<< HEAD
       const basePath = getBasePath();
 
       expect(response.status).toBe(302);
       expect(response.headers.location).toBe(`${basePath}/oauth/success?serverName=test-server`);
+=======
+
+      expect(response.status).toBe(302);
+      expect(response.headers.location).toBe('/oauth/success?serverName=test-server');
+>>>>>>> main
 
       // Verify storeTokens was called with ORIGINAL flow state credentials
       expect(MCPTokenStorage.storeTokens).toHaveBeenCalledWith(
@@ -635,10 +649,16 @@ describe('MCP Routes', () => {
         code: 'test-auth-code',
         state: 'test-flow-id',
       });
+<<<<<<< HEAD
       const basePath = getBasePath();
 
       expect(response.status).toBe(302);
       expect(response.headers.location).toBe(`${basePath}/oauth/success?serverName=test-server`);
+=======
+
+      expect(response.status).toBe(302);
+      expect(response.headers.location).toBe('/oauth/success?serverName=test-server');
+>>>>>>> main
 
       // Verify completeOAuthFlow was NOT called (prevented duplicate)
       expect(MCPOAuthHandler.completeOAuthFlow).not.toHaveBeenCalled();

@@ -74,7 +74,10 @@ const AgentHandoff: React.FC<AgentHandoffProps> = ({ name, args: _args = '' }) =
         {hasInfo && (
           <ChevronDown
             className={cn('ml-1 h-3 w-3 transition-transform', showInfo && 'rotate-180')}
+<<<<<<< HEAD
             aria-hidden="true"
+=======
+>>>>>>> main
           />
         )}
       </div>

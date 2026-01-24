@@ -47,6 +47,11 @@ const { refreshS3Url } = require('~/server/services/Files/S3/crud');
 const { filterFile } = require('~/server/services/Files/process');
 const { updateAction, getActions } = require('~/models/Action');
 const { getCachedTools } = require('~/server/services/Config');
+<<<<<<< HEAD
+=======
+const { deleteFileByFilter } = require('~/models/File');
+const { getCategoriesWithCounts } = require('~/models');
+>>>>>>> main
 const { getLogStores } = require('~/cache');
 
 const systemTools = {
@@ -58,6 +63,49 @@ const systemTools = {
 const MAX_SEARCH_LEN = 100;
 const escapeRegex = (str = '') => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+<<<<<<< HEAD
+=======
+/**
+ * Opportunistically refreshes S3-backed avatars for agent list responses.
+ * Only list responses are refreshed because they're the highest-traffic surface and
+ * the avatar URLs have a short-lived TTL. The refresh is cached per-user for 30 minutes
+ * via {@link CacheKeys.S3_EXPIRY_INTERVAL} so we refresh once per interval at most.
+ * @param {Array} agents - Agents being enriched with S3-backed avatars
+ * @param {string} userId - User identifier used for the cache refresh key
+ */
+const refreshListAvatars = async (agents, userId) => {
+  if (!agents?.length) {
+    return;
+  }
+
+  const cache = getLogStores(CacheKeys.S3_EXPIRY_INTERVAL);
+  const refreshKey = `${userId}:agents_list`;
+  const alreadyChecked = await cache.get(refreshKey);
+  if (alreadyChecked) {
+    return;
+  }
+
+  await Promise.all(
+    agents.map(async (agent) => {
+      if (agent?.avatar?.source !== FileSources.s3 || !agent?.avatar?.filepath) {
+        return;
+      }
+
+      try {
+        const newPath = await refreshS3Url(agent.avatar);
+        if (newPath && newPath !== agent.avatar.filepath) {
+          agent.avatar = { ...agent.avatar, filepath: newPath };
+        }
+      } catch (err) {
+        logger.debug('[/Agents] Avatar refresh error for list item', err);
+      }
+    }),
+  );
+
+  await cache.set(refreshKey, true, Time.THIRTY_MINUTES);
+};
+
+>>>>>>> main
 /**
  * Creates an Agent.
  * @route POST /Agents
@@ -225,11 +273,14 @@ const updateAgentHandler = async (req, res) => {
     // Preserve explicit null for avatar to allow resetting the avatar
     const { avatar: avatarField, _id, ...rest } = validatedData;
     const updateData = removeNullishValues(rest);
+<<<<<<< HEAD
 
     if (updateData.model_parameters && typeof updateData.model_parameters === 'object') {
       updateData.model_parameters = removeNullishValues(updateData.model_parameters, true);
     }
 
+=======
+>>>>>>> main
     if (avatarField === null) {
       updateData.avatar = avatarField;
     }
@@ -506,6 +557,7 @@ const getListAgentsHandler = async (req, res) => {
       requiredPermissions: PermissionBits.VIEW,
     });
 
+<<<<<<< HEAD
     /**
      * Refresh all S3 avatars for this user's accessible agent set (not only the current page)
      * This addresses page-size limits preventing refresh of agents beyond the first page
@@ -535,6 +587,8 @@ const getListAgentsHandler = async (req, res) => {
       }
     }
 
+=======
+>>>>>>> main
     // Use the new ACL-aware function
     const data = await getListAgentsByAccess({
       accessibleIds,
@@ -562,6 +616,15 @@ const getListAgentsHandler = async (req, res) => {
       return agent;
     });
 
+<<<<<<< HEAD
+=======
+    // Opportunistically refresh S3 avatar URLs for list results with caching
+    try {
+      await refreshListAvatars(data.data, req.user.id);
+    } catch (err) {
+      logger.debug('[/Agents] Skipping avatar refresh for list', err);
+    }
+>>>>>>> main
     return res.json(data);
   } catch (error) {
     logger.error('[/Agents] Error listing Agents: %o', error);

@@ -3,17 +3,24 @@ const { Tools, CacheKeys, Constants, FileSources } = require('librechat-data-pro
 const {
   MCPOAuthHandler,
   MCPTokenStorage,
+  mcpServersRegistry,
   normalizeHttpError,
   extractWebSearchEnvVars,
 } = require('@librechat/api');
 const {
   deleteAllUserSessions,
   deleteAllSharedLinks,
+<<<<<<< HEAD
   updateUserPlugins,
   deleteUserById,
   deleteMessages,
   deletePresets,
   deleteUserKey,
+=======
+  deleteUserById,
+  deleteMessages,
+  deletePresets,
+>>>>>>> main
   deleteConvos,
   deleteFiles,
   updateUser,
@@ -37,6 +44,10 @@ const { verifyEmail, resendVerificationEmail } = require('~/server/services/Auth
 const { getMCPManager, getFlowStateManager, getMCPServersRegistry } = require('~/config');
 const { needsRefresh, getNewS3URL } = require('~/server/services/Files/S3/crud');
 const { processDeleteRequest } = require('~/server/services/Files/process');
+<<<<<<< HEAD
+=======
+const { getMCPManager, getFlowStateManager } = require('~/config');
+>>>>>>> main
 const { getAppConfig } = require('~/server/services/Config');
 const { deleteToolCalls } = require('~/models/ToolCall');
 const { deleteUserPrompts } = require('~/models/Prompt');

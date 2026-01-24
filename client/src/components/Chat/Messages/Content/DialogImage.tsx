@@ -212,6 +212,7 @@ export default function DialogImage({
     }
   }, [isPromptOpen, zoom]);
 
+<<<<<<< HEAD
   // Lock body scroll when dialog is open
   useEffect(() => {
     if (isOpen) {
@@ -224,10 +225,13 @@ export default function DialogImage({
     };
   }, [isOpen]);
 
+=======
+>>>>>>> main
   const imageDetailsLabel = isPromptOpen
     ? localize('com_ui_hide_image_details')
     : localize('com_ui_show_image_details');
 
+<<<<<<< HEAD
   // Calculate image max dimensions accounting for side panel (w-80 = 320px)
   const getImageMaxWidth = () => {
     if (isPromptOpen) {
@@ -239,6 +243,8 @@ export default function DialogImage({
     return '90vw';
   };
 
+=======
+>>>>>>> main
   return (
     <DialogPrimitive.Root open={isOpen} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>
@@ -259,6 +265,7 @@ export default function DialogImage({
           onPointerDownOutside={(e) => e.preventDefault()}
           onClick={handleBackgroundClick}
         >
+<<<<<<< HEAD
           {/* Close button - top left */}
           <div className="absolute left-4 top-4 z-20">
             <TooltipAnchor
@@ -281,6 +288,22 @@ export default function DialogImage({
           <div
             className={`absolute top-4 z-20 flex items-center gap-2 transition-[right] duration-300 ${isPromptOpen ? 'right-[336px]' : 'right-4'}`}
           >
+=======
+          <TooltipAnchor
+            description={localize('com_ui_close')}
+            render={
+              <Button
+                onClick={() => onOpenChange(false)}
+                variant="ghost"
+                className="h-10 w-10 p-0 hover:bg-surface-hover"
+                aria-label={localize('com_ui_close')}
+              >
+                <X className="size-7 sm:size-6" />
+              </Button>
+            }
+          />
+          <div className="flex items-center gap-1 sm:gap-2">
+>>>>>>> main
             {zoom > 1 && (
               <TooltipAnchor
                 description={localize('com_ui_reset_zoom')}
@@ -288,10 +311,17 @@ export default function DialogImage({
                   <Button
                     onClick={resetZoom}
                     variant="ghost"
+<<<<<<< HEAD
                     className="h-10 w-10 p-0 text-white hover:bg-white/10"
                     aria-label={localize('com_ui_reset_zoom')}
                   >
                     <RotateCcw className="size-5" aria-hidden="true" />
+=======
+                    className="h-10 w-10 p-0"
+                    aria-label={localize('com_ui_reset_zoom')}
+                  >
+                    <RotateCcw className="size-6" />
+>>>>>>> main
                   </Button>
                 }
               />
@@ -302,10 +332,17 @@ export default function DialogImage({
                 <Button
                   onClick={() => downloadImage()}
                   variant="ghost"
+<<<<<<< HEAD
                   className="h-10 w-10 p-0 text-white hover:bg-white/10"
                   aria-label={localize('com_ui_download')}
                 >
                   <ArrowDownToLine className="size-5" aria-hidden="true" />
+=======
+                  className="h-10 w-10 p-0"
+                  aria-label={localize('com_ui_download')}
+                >
+                  <ArrowDownToLine className="size-6" />
+>>>>>>> main
                 </Button>
               }
             />
@@ -315,7 +352,11 @@ export default function DialogImage({
                 <Button
                   onClick={() => setIsPromptOpen(!isPromptOpen)}
                   variant="ghost"
+<<<<<<< HEAD
                   className="h-10 w-10 p-0 text-white hover:bg-white/10"
+=======
+                  className="h-10 w-10 p-0"
+>>>>>>> main
                   aria-label={imageDetailsLabel}
                 >
                   {isPromptOpen ? (

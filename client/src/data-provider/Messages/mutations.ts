@@ -96,6 +96,7 @@ export const useEditArtifact = (
   };
 
   return useMutation(mutationOptions);
+<<<<<<< HEAD
 };
 
 type BranchMessageContext = {
@@ -171,4 +172,6 @@ export const useBranchMessageMutation = (
   };
 
   return useMutation(mutationOptions);
+=======
+>>>>>>> main
 };

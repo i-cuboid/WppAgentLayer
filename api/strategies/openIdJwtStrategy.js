@@ -81,6 +81,7 @@ const openIdJwtLogin = (openIdConfig) => {
             await updateUser(user.id, updateData);
           }
 
+<<<<<<< HEAD
           /** Read tokens from session (server-side) to avoid large cookie issues */
           const sessionTokens = req.session?.openidTokens;
           let accessToken = sessionTokens?.accessToken;
@@ -93,6 +94,12 @@ const openIdJwtLogin = (openIdConfig) => {
             accessToken = accessToken || parsedCookies.openid_access_token;
             refreshToken = refreshToken || parsedCookies.refreshToken;
           }
+=======
+          const cookieHeader = req.headers.cookie;
+          const parsedCookies = cookieHeader ? cookies.parse(cookieHeader) : {};
+          const accessToken = parsedCookies.openid_access_token;
+          const refreshToken = parsedCookies.refreshToken;
+>>>>>>> main
 
           user.federatedTokens = {
             access_token: accessToken || rawToken,

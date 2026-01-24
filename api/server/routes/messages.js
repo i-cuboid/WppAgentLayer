@@ -1,5 +1,9 @@
 const express = require('express');
+<<<<<<< HEAD
 const { v4: uuidv4 } = require('uuid');
+=======
+const { unescapeLaTeX } = require('@librechat/api');
+>>>>>>> main
 const { logger } = require('@librechat/data-schemas');
 const { ContentTypes } = require('librechat-data-provider');
 const { unescapeLaTeX, countTokens } = require('@librechat/api');

@@ -10,8 +10,12 @@ import {
   getEndpointFileConfig,
 } from 'librechat-data-provider';
 import type { TConversation } from 'librechat-data-provider';
+<<<<<<< HEAD
 import { useGetFileConfig, useGetEndpointsQuery, useGetAgentByIdQuery } from '~/data-provider';
 import { useAgentsMapContext } from '~/Providers';
+=======
+import { useGetFileConfig, useGetEndpointsQuery } from '~/data-provider';
+>>>>>>> main
 import AttachFileMenu from './AttachFileMenu';
 import AttachFile from './AttachFile';
 
@@ -27,6 +31,7 @@ function AttachFileChat({
   const isAgents = useMemo(() => isAgentsEndpoint(endpoint), [endpoint]);
   const isAssistants = useMemo(() => isAssistantsEndpoint(endpoint), [endpoint]);
 
+<<<<<<< HEAD
   const agentsMap = useAgentsMapContext();
 
   const needsAgentFetch = useMemo(() => {
@@ -49,6 +54,8 @@ function AttachFileChat({
     return agent?.model_parameters?.useResponsesApi;
   }, [isAgents, conversation?.agent_id, conversation?.useResponsesApi, agentData, agentsMap]);
 
+=======
+>>>>>>> main
   const { data: fileConfig = null } = useGetFileConfig({
     select: (data) => mergeFileConfig(data),
   });

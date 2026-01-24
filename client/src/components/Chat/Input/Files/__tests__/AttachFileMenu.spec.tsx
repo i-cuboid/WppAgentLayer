@@ -278,6 +278,10 @@ describe('AttachFileMenu', () => {
       { name: 'OpenAI', endpoint: EModelEndpoint.openAI },
       { name: 'Anthropic', endpoint: EModelEndpoint.anthropic },
       { name: 'Google', endpoint: EModelEndpoint.google },
+<<<<<<< HEAD
+=======
+      { name: 'Azure OpenAI', endpoint: EModelEndpoint.azureOpenAI },
+>>>>>>> main
       { name: 'Custom', endpoint: EModelEndpoint.custom },
     ];
 
@@ -300,6 +304,7 @@ describe('AttachFileMenu', () => {
         expect(screen.getByText('Upload to Provider')).toBeInTheDocument();
       });
     });
+<<<<<<< HEAD
 
     it('should show Upload to Provider for Azure OpenAI with useResponsesApi', () => {
       mockUseAgentToolPermissions.mockReturnValue({
@@ -339,6 +344,8 @@ describe('AttachFileMenu', () => {
       expect(screen.queryByText('Upload to Provider')).not.toBeInTheDocument();
       expect(screen.getByText('Upload Image')).toBeInTheDocument();
     });
+=======
+>>>>>>> main
   });
 
   describe('Agent Capabilities', () => {
@@ -550,7 +557,11 @@ describe('AttachFileMenu', () => {
   });
 
   describe('Google Provider Special Case', () => {
+<<<<<<< HEAD
     it('should use image_document_video_audio file type for Google provider', () => {
+=======
+    it('should use google_multimodal file type for Google provider', () => {
+>>>>>>> main
       mockUseAgentToolPermissions.mockReturnValue({
         fileSearchAllowedByAgent: false,
         codeAllowedByAgent: false,
@@ -574,7 +585,11 @@ describe('AttachFileMenu', () => {
       // The file input should have been clicked (indirectly tested through the implementation)
     });
 
+<<<<<<< HEAD
     it('should use image_document file type for non-Google providers', () => {
+=======
+    it('should use multimodal file type for non-Google providers', () => {
+>>>>>>> main
       mockUseAgentToolPermissions.mockReturnValue({
         fileSearchAllowedByAgent: false,
         codeAllowedByAgent: false,
@@ -593,7 +608,11 @@ describe('AttachFileMenu', () => {
       expect(uploadProviderButton).toBeInTheDocument();
       fireEvent.click(uploadProviderButton);
 
+<<<<<<< HEAD
       // Implementation detail - image_document type is used
+=======
+      // Implementation detail - multimodal type is used
+>>>>>>> main
     });
   });
 

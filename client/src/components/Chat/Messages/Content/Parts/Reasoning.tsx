@@ -89,6 +89,7 @@ const Reasoning = memo(({ reasoning, isLast }: ReasoningProps) => {
   }
 
   return (
+<<<<<<< HEAD
     <div
       ref={containerRef}
       className="group/reasoning"
@@ -99,6 +100,11 @@ const Reasoning = memo(({ reasoning, isLast }: ReasoningProps) => {
     >
       <div className="group/thinking-container">
         <div className="mb-2 pb-2 pt-2">
+=======
+    <div className="group/reasoning">
+      <div className="group/thinking-container">
+        <div className="sticky top-0 z-10 mb-2 bg-presentation pb-2 pt-2">
+>>>>>>> main
           <ThinkingButton
             isExpanded={isExpanded}
             onClick={handleClick}
@@ -115,6 +121,7 @@ const Reasoning = memo(({ reasoning, isLast }: ReasoningProps) => {
             gridTemplateRows: isExpanded ? '1fr' : '0fr',
           }}
         >
+<<<<<<< HEAD
           <div className="relative overflow-hidden">
             <ThinkingContent>{reasoningText}</ThinkingContent>
             <FloatingThinkingBar
@@ -123,6 +130,10 @@ const Reasoning = memo(({ reasoning, isLast }: ReasoningProps) => {
               onClick={handleClick}
               content={reasoningText}
             />
+=======
+          <div className="overflow-hidden">
+            <ThinkingContent>{reasoningText}</ThinkingContent>
+>>>>>>> main
           </div>
         </div>
       </div>

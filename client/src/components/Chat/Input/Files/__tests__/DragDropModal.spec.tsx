@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import {
   EModelEndpoint,
   isDocumentSupportedProvider,
   inferMimeType,
 } from 'librechat-data-provider';
+=======
+import { EModelEndpoint, isDocumentSupportedProvider } from 'librechat-data-provider';
+>>>>>>> main
 
 describe('DragDropModal - Provider Detection', () => {
   describe('endpointType priority over currentProvider', () => {
@@ -63,6 +67,10 @@ describe('DragDropModal - Provider Detection', () => {
       { name: 'OpenAI', value: EModelEndpoint.openAI },
       { name: 'Anthropic', value: EModelEndpoint.anthropic },
       { name: 'Google', value: EModelEndpoint.google },
+<<<<<<< HEAD
+=======
+      { name: 'Azure OpenAI', value: EModelEndpoint.azureOpenAI },
+>>>>>>> main
       { name: 'Custom', value: EModelEndpoint.custom },
     ];
 
@@ -71,10 +79,13 @@ describe('DragDropModal - Provider Detection', () => {
         expect(isDocumentSupportedProvider(value)).toBe(true);
       });
     });
+<<<<<<< HEAD
 
     it('should NOT recognize Azure OpenAI as supported (requires useResponsesApi)', () => {
       expect(isDocumentSupportedProvider(EModelEndpoint.azureOpenAI)).toBe(false);
     });
+=======
+>>>>>>> main
   });
 
   describe('real-world scenarios', () => {
@@ -125,6 +136,7 @@ describe('DragDropModal - Provider Detection', () => {
       ).toBe(true);
     });
   });
+<<<<<<< HEAD
 
   describe('HEIC/HEIF file type inference', () => {
     it('should infer image/heic for .heic files when browser returns empty type', () => {
@@ -180,4 +192,6 @@ describe('DragDropModal - Provider Detection', () => {
       expect(inferredType).toBe('');
     });
   });
+=======
+>>>>>>> main
 });

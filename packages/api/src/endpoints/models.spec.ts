@@ -92,7 +92,11 @@ describe('fetchModels', () => {
       headers: customHeaders,
     });
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     expect(mockedAxios.get).toHaveBeenCalledWith(
+=======
+    expect(axios.get).toHaveBeenCalledWith(
+>>>>>>> main:api/server/services/ModelService.spec.js
       expect.stringContaining('https://api.test.com/models'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -113,7 +117,11 @@ describe('fetchModels', () => {
       headers: null,
     });
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     expect(mockedAxios.get).toHaveBeenCalledWith(
+=======
+    expect(axios.get).toHaveBeenCalledWith(
+>>>>>>> main:api/server/services/ModelService.spec.js
       expect.stringContaining('https://api.test.com/models'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -132,7 +140,11 @@ describe('fetchModels', () => {
       headers: undefined,
     });
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     expect(mockedAxios.get).toHaveBeenCalledWith(
+=======
+    expect(axios.get).toHaveBeenCalledWith(
+>>>>>>> main:api/server/services/ModelService.spec.js
       expect.stringContaining('https://api.test.com/models'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -524,7 +536,11 @@ describe('getAnthropicModels', () => {
     delete process.env.ANTHROPIC_MODELS;
     process.env.ANTHROPIC_API_KEY = 'test-anthropic-key';
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     mockedAxios.get.mockResolvedValue({
+=======
+    axios.get.mockResolvedValue({
+>>>>>>> main:api/server/services/ModelService.spec.js
       data: {
         data: [{ id: 'claude-3' }, { id: 'claude-4' }],
       },
@@ -537,7 +553,11 @@ describe('getAnthropicModels', () => {
       name: EModelEndpoint.anthropic,
     });
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     expect(mockedAxios.get).toHaveBeenCalledWith(
+=======
+    expect(axios.get).toHaveBeenCalledWith(
+>>>>>>> main:api/server/services/ModelService.spec.js
       expect.any(String),
       expect.objectContaining({
         headers: {
@@ -553,7 +573,11 @@ describe('getAnthropicModels', () => {
       'X-Custom-Header': 'custom-value',
     };
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     mockedAxios.get.mockResolvedValue({
+=======
+    axios.get.mockResolvedValue({
+>>>>>>> main:api/server/services/ModelService.spec.js
       data: {
         data: [{ id: 'claude-3' }],
       },
@@ -567,7 +591,11 @@ describe('getAnthropicModels', () => {
       headers: customHeaders,
     });
 
+<<<<<<< HEAD:packages/api/src/endpoints/models.spec.ts
     expect(mockedAxios.get).toHaveBeenCalledWith(
+=======
+    expect(axios.get).toHaveBeenCalledWith(
+>>>>>>> main:api/server/services/ModelService.spec.js
       expect.any(String),
       expect.objectContaining({
         headers: {

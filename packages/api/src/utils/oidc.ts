@@ -36,16 +36,40 @@ const OPENID_TOKEN_FIELDS = [
 
 export function extractOpenIDTokenInfo(user: IUser | null | undefined): OpenIDTokenInfo | null {
   if (!user) {
+<<<<<<< HEAD
+=======
+    logger.debug('[extractOpenIDTokenInfo] No user provided');
+>>>>>>> main
     return null;
   }
 
   try {
+<<<<<<< HEAD
     if (user.provider !== 'openid' && !user.openidId) {
+=======
+    logger.debug(
+      '[extractOpenIDTokenInfo] User provider:',
+      user.provider,
+      'openidId:',
+      user.openidId,
+    );
+
+    if (user.provider !== 'openid' && !user.openidId) {
+      logger.debug('[extractOpenIDTokenInfo] User not authenticated via OpenID');
+>>>>>>> main
       return null;
     }
 
     const tokenInfo: OpenIDTokenInfo = {};
 
+<<<<<<< HEAD
+=======
+    logger.debug(
+      '[extractOpenIDTokenInfo] Checking for federatedTokens in user object:',
+      'federatedTokens' in user,
+    );
+
+>>>>>>> main
     if ('federatedTokens' in user && isFederatedTokens(user.federatedTokens)) {
       const tokens = user.federatedTokens;
       logger.debug('[extractOpenIDTokenInfo] Found federatedTokens:', {

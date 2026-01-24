@@ -1,5 +1,13 @@
 const { logger } = require('@librechat/data-schemas');
 const { createContentAggregator } = require('@librechat/agents');
+<<<<<<< HEAD
+=======
+const {
+  validateAgentModel,
+  getCustomEndpointConfig,
+  createSequentialChainEdges,
+} = require('@librechat/api');
+>>>>>>> main
 const {
   initializeAgent,
   validateAgentModel,
@@ -145,6 +153,7 @@ const initializeClient = async ({ req, res, signal, endpointOption }) => {
 
   const agent_ids = primaryConfig.agent_ids;
   let userMCPAuthMap = primaryConfig.userMCPAuthMap;
+<<<<<<< HEAD
 
   /** @type {Set<string>} Track agents that failed to load (orphaned references) */
   const skippedAgentIds = new Set();
@@ -222,6 +231,74 @@ const initializeClient = async ({ req, res, signal, endpointOption }) => {
       }
     } catch (err) {
       logger.error(`[initializeClient] Error processing agent ${agentId}:`, err);
+=======
+
+  async function processAgent(agentId) {
+    const agent = await getAgent({ id: agentId });
+    if (!agent) {
+      throw new Error(`Agent ${agentId} not found`);
+    }
+
+    const validationResult = await validateAgentModel({
+      req,
+      res,
+      agent,
+      modelsConfig,
+      logViolation,
+    });
+
+    if (!validationResult.isValid) {
+      throw new Error(validationResult.error?.message);
+    }
+
+    const config = await initializeAgent({
+      req,
+      res,
+      agent,
+      loadTools,
+      requestFiles,
+      conversationId,
+      endpointOption,
+      allowedProviders,
+    });
+    if (userMCPAuthMap != null) {
+      Object.assign(userMCPAuthMap, config.userMCPAuthMap ?? {});
+    } else {
+      userMCPAuthMap = config.userMCPAuthMap;
+    }
+    agentConfigs.set(agentId, config);
+  }
+
+  let edges = primaryConfig.edges;
+  const checkAgentInit = (agentId) => agentId === primaryConfig.id || agentConfigs.has(agentId);
+  if ((edges?.length ?? 0) > 0) {
+    for (const edge of edges) {
+      if (Array.isArray(edge.to)) {
+        for (const to of edge.to) {
+          if (checkAgentInit(to)) {
+            continue;
+          }
+          await processAgent(to);
+        }
+      } else if (typeof edge.to === 'string' && checkAgentInit(edge.to)) {
+        continue;
+      } else if (typeof edge.to === 'string') {
+        await processAgent(edge.to);
+      }
+
+      if (Array.isArray(edge.from)) {
+        for (const from of edge.from) {
+          if (checkAgentInit(from)) {
+            continue;
+          }
+          await processAgent(from);
+        }
+      } else if (typeof edge.from === 'string' && checkAgentInit(edge.from)) {
+        continue;
+      } else if (typeof edge.from === 'string') {
+        await processAgent(edge.from);
+      }
+>>>>>>> main
     }
   }
 
@@ -233,6 +310,7 @@ const initializeClient = async ({ req, res, signal, endpointOption }) => {
       }
       await processAgent(agentId);
     }
+<<<<<<< HEAD
     const chain = await createSequentialChainEdges([primaryConfig.id].concat(agent_ids), '{convo}');
     collectEdges(chain);
   }
@@ -269,6 +347,13 @@ const initializeClient = async ({ req, res, signal, endpointOption }) => {
   // Filter out edges referencing non-existent agents (orphaned references)
   edges = filterOrphanedEdges(edges, skippedAgentIds);
 
+=======
+
+    const chain = await createSequentialChainEdges([primaryConfig.id].concat(agent_ids), '{convo}');
+    edges = edges ? edges.concat(chain) : chain;
+  }
+
+>>>>>>> main
   primaryConfig.edges = edges;
 
   let endpointConfig = appConfig.endpoints?.[primaryConfig.endpoint];

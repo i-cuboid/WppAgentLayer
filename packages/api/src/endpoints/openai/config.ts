@@ -77,6 +77,7 @@ export function getOpenAIConfig(
       headers = Object.assign(headers ?? {}, transformed.configOptions?.defaultHeaders);
     }
   } else if (isGoogle) {
+<<<<<<< HEAD
     const googleResult = getGoogleConfig(
       apiKey,
       {
@@ -89,17 +90,34 @@ export function getOpenAIConfig(
       },
       true,
     );
+=======
+    const googleResult = getGoogleConfig(apiKey, {
+      modelOptions,
+      reverseProxyUrl: baseURL ?? undefined,
+      authHeader: true,
+      addParams,
+      dropParams,
+      defaultParams,
+    });
+>>>>>>> main
     /** Transform handles addParams/dropParams - it knows about OpenAI params */
     const transformed = transformToOpenAIConfig({
       addParams,
       dropParams,
+<<<<<<< HEAD
       defaultParams,
       tools: googleResult.tools,
+=======
+>>>>>>> main
       llmConfig: googleResult.llmConfig,
       fromEndpoint: EModelEndpoint.google,
     });
     llmConfig = transformed.llmConfig;
+<<<<<<< HEAD
     tools = transformed.tools;
+=======
+    tools = googleResult.tools;
+>>>>>>> main
   } else {
     const openaiResult = getOpenAILLMConfig({
       azure,

@@ -32,11 +32,21 @@ const {
   OpenWeather,
   StructuredSD,
   StructuredACS,
+
+  StructuredWPPACSTractor,
+  StructuredWPPACSCases,
+  StructuredWPPACSCatalog,
+  StructuredWPPACSCyclopedia,
+  StructuredWPPACSWebsite,
+
   TraversaalSearch,
   StructuredWolfram,
   TavilySearchResults,
   createGeminiImageTool,
   createOpenAIImageTools,
+
+  StructuredWoodlandAIEngineHistory,
+  StructuredWoodlandAIProductHistory,
 } = require('../');
 const { primeFiles: primeCodeFiles } = require('~/server/services/Files/Code/process');
 const { createFileSearchTool, primeFiles: primeSearchFiles } = require('./fileSearch');
@@ -122,10 +132,27 @@ const validateTools = async (user, tools = []) => {
  * @param {Object} options Optional parameters to be passed to the tool constructor alongside authentication values.
  * @returns {() => Promise<Tool>} An Async function that, when called, asynchronously initializes and returns an instance of the tool with authentication.
  */
+const TOOL_INSTANCE_CACHE = new Map();
+
 const loadToolWithAuth = (userId, authFields, ToolConstructor, options = {}) => {
+  const { __cacheKey, __disableCache, ...toolOptions } = options || {};
+  const shouldReuse =
+    ToolConstructor && ToolConstructor.enableReusableInstance && __disableCache !== true;
+  let cacheKey = null;
+  if (shouldReuse) {
+    cacheKey = __cacheKey || `${ToolConstructor?.name || 'Tool'}::${userId}`;
+  }
+
   return async function () {
+    if (cacheKey && TOOL_INSTANCE_CACHE.has(cacheKey)) {
+      return TOOL_INSTANCE_CACHE.get(cacheKey);
+    }
     const authValues = await loadAuthValues({ userId, authFields });
-    return new ToolConstructor({ ...options, ...authValues, userId });
+    const instance = new ToolConstructor({ ...toolOptions, ...authValues, userId });
+    if (cacheKey) {
+      TOOL_INSTANCE_CACHE.set(cacheKey, instance);
+    }
+    return instance;
   };
 };
 
@@ -179,11 +206,28 @@ const loadTools = async ({
     wolfram: StructuredWolfram,
     'stable-diffusion': StructuredSD,
     'azure-ai-search': StructuredACS,
+
+    'woodland-ai-search-tractor': StructuredWPPACSTractor,
+    'woodland-ai-search-cases': StructuredWPPACSCases,
+    'woodland-ai-search-catalog': StructuredWPPACSCatalog,
+    'woodland-ai-search-cyclopedia': StructuredWPPACSCyclopedia,
+    'woodland-ai-search-website': StructuredWPPACSWebsite,
+
+    'woodland-ai-product-history': StructuredWoodlandAIProductHistory,
+    'woodland-ai-engine-history': StructuredWoodlandAIEngineHistory,
     traversaal_search: TraversaalSearch,
     tavily_search_results_json: TavilySearchResults,
   };
 
   const customConstructors = {
+<<<<<<< HEAD
+=======
+    youtube: async (_toolContextMap) => {
+      const authFields = getAuthFields('youtube');
+      const authValues = await loadAuthValues({ userId: user, authFields });
+      return createYouTubeTools(authValues);
+    },
+>>>>>>> main
     image_gen_oai: async (toolContextMap) => {
       const authFields = getAuthFields('image_gen_oai');
       const authValues = await loadAuthValues({ userId: user, authFields });
@@ -249,7 +293,10 @@ const loadTools = async ({
     flux: imageGenOptions,
     dalle: imageGenOptions,
     'stable-diffusion': imageGenOptions,
+<<<<<<< HEAD
     gemini_image_gen: imageGenOptions,
+=======
+>>>>>>> main
   };
 
   /** @type {Record<string, string>} */
@@ -408,6 +455,9 @@ Anchor pattern: \\ue202turn{N}{type}{index} where N=turn number, type=search|new
   if (returnMap) {
     return requestedTools;
   }
+  logger.info('[handleTools] Tools queued for initialization', {
+    queued: Object.keys(requestedTools),
+  });
 
   const toolPromises = [];
   for (const tool of tools) {

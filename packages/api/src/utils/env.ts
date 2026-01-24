@@ -118,7 +118,11 @@ const ALLOWED_BODY_FIELDS = ['conversationId', 'parentMessageId', 'messageId'] a
  * @param isHeader - Whether this value will be used in an HTTP header
  * @returns The processed string with placeholders replaced (and encoded if necessary)
  */
+<<<<<<< HEAD
 function processUserPlaceholders(value: string, user?: IUser, isHeader: boolean = false): string {
+=======
+function processUserPlaceholders(value: string, user?: IUser): string {
+>>>>>>> main
   if (!user || typeof value !== 'string') {
     return value;
   }
@@ -228,6 +232,7 @@ function processSingleValue({
     }
   }
 
+<<<<<<< HEAD
   value = processUserPlaceholders(value, user, isHeader);
 
   const openidTokenInfo = extractOpenIDTokenInfo(user);
@@ -235,6 +240,15 @@ function processSingleValue({
     value = processOpenIDPlaceholders(value, openidTokenInfo);
   }
 
+=======
+  value = processUserPlaceholders(value, user);
+
+  const openidTokenInfo = extractOpenIDTokenInfo(user);
+  if (openidTokenInfo && isOpenIDTokenValid(openidTokenInfo)) {
+    value = processOpenIDPlaceholders(value, openidTokenInfo);
+  }
+
+>>>>>>> main
   if (body) {
     value = processBodyPlaceholders(value, body);
   }
@@ -395,6 +409,38 @@ function processValue(
 /**
  * Recursively resolves placeholders in a nested object structure while preserving types.
  * Only processes string values - leaves numbers, booleans, arrays, and nested objects intact.
+<<<<<<< HEAD
+=======
+ *
+ * @param options - Configuration object
+ * @param options.obj - The object to process
+ * @param options.user - Optional user object for replacing user field placeholders
+ * @param options.body - Optional request body object for replacing body field placeholders
+ * @param options.customUserVars - Optional custom user variables to replace placeholders
+ * @returns The processed object with placeholders replaced in string values
+ */
+export function resolveNestedObject<T = unknown>(options?: {
+  obj: T | undefined;
+  user?: Partial<IUser> | { id: string };
+  body?: RequestBody;
+  customUserVars?: Record<string, string>;
+}): T {
+  const { obj, user, body, customUserVars } = options ?? {};
+
+  if (!obj) {
+    return obj as T;
+  }
+
+  return processValue(obj, {
+    customUserVars,
+    user: user as IUser,
+    body,
+  }) as T;
+}
+
+/**
+ * Resolves header values by replacing user placeholders, body variables, custom variables, and environment variables.
+>>>>>>> main
  *
  * @param options - Configuration object
  * @param options.obj - The object to process

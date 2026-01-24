@@ -5,7 +5,11 @@ const { Calculator } = require('@librechat/agents');
 const { logger } = require('@librechat/data-schemas');
 const { zodToJsonSchema } = require('zod-to-json-schema');
 const { Tools, ImageVisionTool } = require('librechat-data-provider');
+<<<<<<< HEAD
 const { getToolkitKey, oaiToolkit, geminiToolkit } = require('@librechat/api');
+=======
+const { getToolkitKey, oaiToolkit, ytToolkit } = require('@librechat/api');
+>>>>>>> main
 const { toolkits } = require('~/app/clients/tools/manifest');
 
 /**

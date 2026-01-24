@@ -143,6 +143,7 @@ export default function SharedLinkButton({
             <TooltipAnchor
               description={localize('com_ui_refresh_link')}
               render={(props) => (
+<<<<<<< HEAD
                 <>
                   <span className="sr-only" aria-live="polite" aria-atomic="true">
                     {announcement}
@@ -161,6 +162,21 @@ export default function SharedLinkButton({
                     )}
                   </Button>
                 </>
+=======
+                <Button
+                  {...props}
+                  onClick={() => updateSharedLink()}
+                  aria-label={localize('com_ui_refresh_link')}
+                  variant="outline"
+                  disabled={isUpdateLoading}
+                >
+                  {isUpdateLoading ? (
+                    <Spinner className="size-4" />
+                  ) : (
+                    <RotateCw className="size-4" />
+                  )}
+                </Button>
+>>>>>>> main
               )}
             />
 
@@ -173,7 +189,11 @@ export default function SharedLinkButton({
                   variant="outline"
                   aria-label={qrCodeLabel}
                 >
+<<<<<<< HEAD
                   <QrCode className="size-4" aria-hidden="true" />
+=======
+                  <QrCode className="size-4" />
+>>>>>>> main
                 </Button>
               )}
             />
@@ -183,12 +203,19 @@ export default function SharedLinkButton({
               render={(props) => (
                 <Button
                   {...props}
+<<<<<<< HEAD
                   ref={deleteButtonRef}
+=======
+>>>>>>> main
                   onClick={() => setShowDeleteDialog(true)}
                   variant="destructive"
                   aria-label={localize('com_ui_delete')}
                 >
+<<<<<<< HEAD
                   <Trash2 className="size-4" aria-hidden="true" />
+=======
+                  <Trash2 className="size-4" />
+>>>>>>> main
                 </Button>
               )}
             />

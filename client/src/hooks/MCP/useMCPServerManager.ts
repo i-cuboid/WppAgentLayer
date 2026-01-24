@@ -136,6 +136,7 @@ export function useMCPServerManager({ conversationId }: { conversationId?: strin
     enabled: !isLoading && availableMCPServers.length > 0,
   });
 
+<<<<<<< HEAD
   const updateServerInitState = useCallback(
     (serverName: string, updates: Partial<MCPServerInitState>) => {
       setServerInitStates((prev) => {
@@ -148,6 +149,22 @@ export function useMCPServerManager({ conversationId }: { conversationId?: strin
     },
     [setServerInitStates],
   );
+=======
+  const updateServerState = useCallback((serverName: string, updates: Partial<ServerState>) => {
+    setServerStates((prev) => {
+      const newStates = { ...prev };
+      const currentState = newStates[serverName] || {
+        isInitializing: false,
+        oauthUrl: null,
+        oauthStartTime: null,
+        isCancellable: false,
+        pollInterval: null,
+      };
+      newStates[serverName] = { ...currentState, ...updates };
+      return newStates;
+    });
+  }, []);
+>>>>>>> main
 
   const cleanupServerState = useCallback(
     (serverName: string) => {

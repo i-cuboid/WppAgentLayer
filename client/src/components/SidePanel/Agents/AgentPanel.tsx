@@ -46,7 +46,11 @@ function getUpdateToastMessage(
   if (noVersionChange) {
     return localize('com_ui_no_changes');
   }
+<<<<<<< HEAD
   return localize('com_assistants_update_success_name', { name: name ?? localize('com_ui_agent') });
+=======
+  return `${localize('com_assistants_update_success')} ${name ?? localize('com_ui_agent')}`;
+>>>>>>> main
 }
 
 /**

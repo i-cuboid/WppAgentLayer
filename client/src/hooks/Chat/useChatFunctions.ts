@@ -31,6 +31,7 @@ import { logger, createDualMessageContent } from '~/utils';
 import store, { useGetEphemeralAgent } from '~/store';
 import useUserKey from '~/hooks/Input/useUserKey';
 import { useAuthContext } from '~/hooks';
+import { logger } from '~/utils';
 
 const logChatRequest = (request: Record<string, unknown>) => {
   logger.log('=====================================\nAsk function called with:');

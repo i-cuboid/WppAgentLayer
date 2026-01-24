@@ -59,7 +59,10 @@ jest.mock('~/server/middleware', () => ({
     forkUserLimiter: (req, res, next) => next(),
   })),
   configMiddleware: (req, res, next) => next(),
+<<<<<<< HEAD
   validateConvoAccess: (req, res, next) => next(),
+=======
+>>>>>>> main
 }));
 
 jest.mock('~/server/utils/import/fork', () => ({
@@ -109,7 +112,11 @@ describe('Convos Routes', () => {
   let app;
   let convosRouter;
   const { deleteAllSharedLinks, deleteConvoSharedLink } = require('~/models');
+<<<<<<< HEAD
   const { deleteConvos, saveConvo } = require('~/models/Conversation');
+=======
+  const { deleteConvos } = require('~/models/Conversation');
+>>>>>>> main
   const { deleteToolCalls } = require('~/models/ToolCall');
 
   beforeAll(() => {
@@ -461,6 +468,7 @@ describe('Convos Routes', () => {
       expect(deleteConvoSharedLink).toHaveBeenCalledAfter(deleteConvos);
     });
   });
+<<<<<<< HEAD
 
   describe('POST /archive', () => {
     it('should archive a conversation successfully', async () => {
@@ -593,6 +601,8 @@ describe('Convos Routes', () => {
       expect(response.body).toEqual({ error: 'conversationId is required' });
     });
   });
+=======
+>>>>>>> main
 });
 
 /**

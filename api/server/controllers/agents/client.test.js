@@ -1310,8 +1310,13 @@ describe('AgentClient - titleConvo', () => {
       expect(client.options.agent.instructions).toContain('# MCP Server Instructions');
       expect(client.options.agent.instructions).toContain('Use these tools carefully');
 
+<<<<<<< HEAD
       // Verify the base instructions are also included (from agent config, not buildOptions)
       expect(client.options.agent.instructions).toContain('Base agent instructions');
+=======
+      // Verify the base instructions are also included
+      expect(client.options.agent.instructions).toContain('Base instructions');
+>>>>>>> main
     });
 
     it('should handle MCP instructions with ephemeral agent', async () => {
@@ -1373,8 +1378,13 @@ describe('AgentClient - titleConvo', () => {
         additional_instructions: null,
       });
 
+<<<<<<< HEAD
       // Verify the instructions still work without MCP content (from agent config, not buildOptions)
       expect(client.options.agent.instructions).toBe('Base agent instructions');
+=======
+      // Verify the instructions still work without MCP content
+      expect(client.options.agent.instructions).toBe('Base instructions only');
+>>>>>>> main
       expect(client.options.agent.instructions).not.toContain('[object Promise]');
     });
 
@@ -1398,8 +1408,13 @@ describe('AgentClient - titleConvo', () => {
         additional_instructions: null,
       });
 
+<<<<<<< HEAD
       // Should still have base instructions without MCP content (from agent config, not buildOptions)
       expect(client.options.agent.instructions).toContain('Base agent instructions');
+=======
+      // Should still have base instructions without MCP content
+      expect(client.options.agent.instructions).toContain('Base instructions');
+>>>>>>> main
       expect(client.options.agent.instructions).not.toContain('[object Promise]');
     });
   });

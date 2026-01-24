@@ -715,7 +715,11 @@ class BaseClient {
       iconURL: this.options.iconURL,
       endpoint: this.options.endpoint,
       ...(this.metadata ?? {}),
+<<<<<<< HEAD
       metadata: Object.keys(metadata ?? {}).length > 0 ? metadata : undefined,
+=======
+      metadata,
+>>>>>>> main
     };
 
     if (typeof completion === 'string') {
@@ -1228,8 +1232,13 @@ class BaseClient {
       this.options.req,
       attachments,
       {
+<<<<<<< HEAD
         provider: this.options.agent?.provider ?? this.options.endpoint,
         endpoint: this.options.agent?.endpoint ?? this.options.endpoint,
+=======
+        provider: this.options.agent?.provider,
+        endpoint: this.options.agent?.endpoint,
+>>>>>>> main
         useResponsesApi: this.options.agent?.model_parameters?.useResponsesApi,
       },
       getStrategyFunctions,
@@ -1246,8 +1255,13 @@ class BaseClient {
       this.options.req,
       attachments,
       {
+<<<<<<< HEAD
         provider: this.options.agent?.provider ?? this.options.endpoint,
         endpoint: this.options.agent?.endpoint ?? this.options.endpoint,
+=======
+        provider: this.options.agent?.provider,
+        endpoint: this.options.agent?.endpoint,
+>>>>>>> main
       },
       getStrategyFunctions,
     );
@@ -1261,8 +1275,13 @@ class BaseClient {
       this.options.req,
       attachments,
       {
+<<<<<<< HEAD
         provider: this.options.agent?.provider ?? this.options.endpoint,
         endpoint: this.options.agent?.endpoint ?? this.options.endpoint,
+=======
+        provider: this.options.agent?.provider,
+        endpoint: this.options.agent?.endpoint,
+>>>>>>> main
       },
       getStrategyFunctions,
     );

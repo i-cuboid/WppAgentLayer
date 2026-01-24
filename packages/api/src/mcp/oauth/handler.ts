@@ -9,7 +9,11 @@ import {
   discoverAuthorizationServerMetadata,
   discoverOAuthProtectedResourceMetadata,
 } from '@modelcontextprotocol/sdk/client/auth.js';
+<<<<<<< HEAD
 import { TokenExchangeMethodEnum, type MCPOptions } from 'librechat-data-provider';
+=======
+import type { MCPOptions } from 'librechat-data-provider';
+>>>>>>> main
 import type { FlowStateManager } from '~/flow/manager';
 import type {
   OAuthClientInformation,

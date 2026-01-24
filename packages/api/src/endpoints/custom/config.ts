@@ -1,5 +1,9 @@
 import { EModelEndpoint, extractEnvVariable, normalizeEndpointName } from 'librechat-data-provider';
+<<<<<<< HEAD
 import type { TCustomEndpoints, TEndpoint } from 'librechat-data-provider';
+=======
+import type { TCustomEndpoints, TEndpoint, TConfig } from 'librechat-data-provider';
+>>>>>>> main
 import type { TCustomEndpointsConfig } from '~/types/endpoints';
 import { isUserProvided } from '~/utils';
 

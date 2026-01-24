@@ -1,6 +1,10 @@
 {
   "name": "@librechat/client",
+<<<<<<< HEAD
   "version": "0.4.50",
+=======
+  "version": "0.3.2",
+>>>>>>> main
   "description": "React components for LibreChat",
   "repository": {
     "type": "git",

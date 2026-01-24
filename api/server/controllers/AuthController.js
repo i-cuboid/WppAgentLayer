@@ -99,6 +99,7 @@ const refreshController = async (req, res) => {
         );
         return res.status(401).redirect('/login');
       }
+<<<<<<< HEAD
 
       // Handle migration: update user with openidId if found by email without openidId
       // Also handle case where user has mismatched openidId (e.g., after database switch)
@@ -114,6 +115,9 @@ const refreshController = async (req, res) => {
       }
 
       const token = setOpenIDAuthTokens(tokenset, req, res, user._id.toString(), refreshToken);
+=======
+      const token = setOpenIDAuthTokens(tokenset, res, user._id.toString(), refreshToken);
+>>>>>>> main
 
       user.federatedTokens = {
         access_token: tokenset.access_token,

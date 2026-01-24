@@ -112,6 +112,7 @@ const AttachFileMenu = ({
     const createMenuItems = (onAction: (fileType?: FileUploadType) => void) => {
       const items: MenuItemProps[] = [];
 
+<<<<<<< HEAD
       let currentProvider = provider || endpoint;
 
       // This will be removed in a future PR to formally normalize Providers comparisons to be case insensitive
@@ -126,6 +127,12 @@ const AttachFileMenu = ({
         isDocumentSupportedProvider(endpointType) ||
         isDocumentSupportedProvider(currentProvider) ||
         isAzureWithResponsesApi
+=======
+      const currentProvider = provider || endpoint;
+      if (
+        isDocumentSupportedProvider(endpointType) ||
+        isDocumentSupportedProvider(currentProvider)
+>>>>>>> main
       ) {
         items.push({
           label: localize('com_ui_upload_provider'),

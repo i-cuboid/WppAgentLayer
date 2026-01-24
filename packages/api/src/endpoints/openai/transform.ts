@@ -5,6 +5,7 @@ import type * as t from '~/types';
 import { knownOpenAIParams } from './llm';
 
 const anthropicExcludeParams = new Set(['anthropicApiUrl']);
+<<<<<<< HEAD
 const googleExcludeParams = new Set([
   'safetySettings',
   'location',
@@ -19,6 +20,9 @@ const googleExcludeParams = new Set([
 const googleToolsToFilter = new Set(['googleSearch']);
 
 export type ConfigTools = Array<Record<string, unknown>> | Array<GoogleAIToolType>;
+=======
+const googleExcludeParams = new Set(['safetySettings', 'location', 'baseUrl', 'customHeaders']);
+>>>>>>> main
 
 /**
  * Transforms a Non-OpenAI LLM config to an OpenAI-conformant config.
@@ -78,9 +82,24 @@ export function transformToOpenAIConfig({
       hasModelKwargs = true;
       continue;
     } else if (isGoogle && key === 'authOptions') {
+<<<<<<< HEAD
       modelKwargs = Object.assign({}, modelKwargs, value as Record<string, unknown>);
       hasModelKwargs = true;
       continue;
+=======
+      // Handle Google authOptions
+      modelKwargs = Object.assign({}, modelKwargs, value as Record<string, unknown>);
+      hasModelKwargs = true;
+      continue;
+    } else if (
+      isGoogle &&
+      (key === 'thinkingConfig' || key === 'thinkingBudget' || key === 'includeThoughts')
+    ) {
+      // Handle Google thinking configuration
+      modelKwargs = Object.assign({}, modelKwargs, { [key]: value });
+      hasModelKwargs = true;
+      continue;
+>>>>>>> main
     }
 
     if (knownOpenAIParams.has(key)) {

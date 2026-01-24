@@ -415,10 +415,16 @@ endpoints:
       apiKey: '${HELICONE_KEY}'
       baseURL: 'https://ai-gateway.helicone.ai'
       headers:
+<<<<<<< HEAD
         x-librechat-body-parentmessageid: '{{LIBRECHAT_BODY_PARENTMESSAGEID}}'
       models:
         default:
           ['gpt-4o-mini', 'claude-4.5-sonnet', 'llama-3.1-8b-instruct', 'gemini-2.5-flash-lite']
+=======
+          x-librechat-body-parentmessageid: '{{LIBRECHAT_BODY_PARENTMESSAGEID}}'
+      models:
+        default: ['gpt-4o-mini', 'claude-4.5-sonnet', 'llama-3.1-8b-instruct', 'gemini-2.5-flash-lite']
+>>>>>>> main
         fetch: true
       titleConvo: true
       titleModel: 'gpt-4o-mini'

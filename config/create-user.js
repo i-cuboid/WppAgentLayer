@@ -78,7 +78,11 @@ const connect = require('./connect');
   }
 
   // Only prompt for emailVerified if it wasn't set via CLI
+<<<<<<< HEAD
   if (emailVerified === undefined) {
+=======
+  if (emailVerified === undefined){
+>>>>>>> main
     const emailVerifiedInput = await askQuestion(`Email verified? (Y/n, default is Y):
 
 If \`y\`, the user's email will be considered verified.

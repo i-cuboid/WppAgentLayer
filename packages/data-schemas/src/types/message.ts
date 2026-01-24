@@ -37,7 +37,10 @@ export interface IMessage extends Document {
   content?: unknown[];
   thread_id?: string;
   iconURL?: string;
+<<<<<<< HEAD
   addedConvo?: boolean;
+=======
+>>>>>>> main
   metadata?: Record<string, unknown>;
   attachments?: unknown[];
   expiredAt?: Date;

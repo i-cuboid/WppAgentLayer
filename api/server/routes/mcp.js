@@ -164,7 +164,11 @@ router.get('/:serverName/oauth/callback', async (req, res) => {
         flowId,
         serverName,
       });
+<<<<<<< HEAD
       return res.redirect(`${basePath}/oauth/success?serverName=${encodeURIComponent(serverName)}`);
+=======
+      return res.redirect(`/oauth/success?serverName=${encodeURIComponent(serverName)}`);
+>>>>>>> main
     }
 
     logger.debug('[MCP OAuth] Completing OAuth flow');

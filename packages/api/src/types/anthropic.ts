@@ -77,10 +77,13 @@ export interface AnthropicConfigOptions {
   addParams?: Record<string, unknown>;
   /** Parameters to drop/exclude from the configuration */
   dropParams?: string[];
+<<<<<<< HEAD
   /** Vertex AI specific options for Google Cloud configuration */
   vertexOptions?: VertexAIClientOptions;
   /** Full Vertex AI configuration including model mappings from YAML config */
   vertexConfig?: TVertexAISchema;
+=======
+>>>>>>> main
 }
 
 /**

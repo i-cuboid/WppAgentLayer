@@ -1,10 +1,14 @@
 import { TokenExchangeMethodEnum } from 'librechat-data-provider';
+<<<<<<< HEAD
 import {
   resolveHeaders,
   resolveNestedObject,
   processMCPEnv,
   encodeHeaderValue,
 } from './env';
+=======
+import { resolveHeaders, resolveNestedObject, processMCPEnv } from './env';
+>>>>>>> main
 import type { MCPOptions } from 'librechat-data-provider';
 import type { IUser } from '@librechat/data-schemas';
 import { Types } from 'mongoose';
@@ -1459,6 +1463,7 @@ describe('processMCPEnv', () => {
       }
     });
   });
+<<<<<<< HEAD
 
   describe('admin-provided API key header injection', () => {
     it('should apply admin-provided bearer API key to Authorization header', () => {
@@ -1612,4 +1617,6 @@ describe('processMCPEnv', () => {
       }
     });
   });
+=======
+>>>>>>> main
 });

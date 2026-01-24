@@ -94,7 +94,11 @@ const Radio = memo(function Radio({
       className={`relative ${fullWidth ? 'flex' : 'inline-flex'} items-center rounded-lg bg-muted p-1 ${className}`}
       role="radiogroup"
     >
+<<<<<<< HEAD
       {selectedIndex >= 0 && isMounted && (
+=======
+      {selectedIndex >= 0 && (
+>>>>>>> main
         <div
           className="pointer-events-none absolute inset-y-1 rounded-md border border-border/50 bg-background shadow-sm transition-all duration-300 ease-out"
           style={backgroundStyle}
@@ -115,11 +119,15 @@ const Radio = memo(function Radio({
             currentValue === option.value ? 'text-foreground' : 'text-foreground'
           } ${disabled ? 'cursor-not-allowed opacity-50' : ''} ${fullWidth ? 'flex-1' : ''}`}
         >
+<<<<<<< HEAD
           {option.icon && (
             <span className="flex-shrink-0" aria-hidden="true">
               {option.icon}
             </span>
           )}
+=======
+          {option.icon && <span className="flex-shrink-0">{option.icon}</span>}
+>>>>>>> main
           <span className="whitespace-nowrap">{option.label}</span>
         </button>
       ))}

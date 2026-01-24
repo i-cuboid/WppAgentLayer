@@ -1,11 +1,22 @@
 import { ErrorTypes, EModelEndpoint, mapModelToAzureConfig } from 'librechat-data-provider';
 import type {
+<<<<<<< HEAD
   BaseInitializeParams,
   InitializeResultBase,
+=======
+  InitializeOpenAIOptionsParams,
+>>>>>>> main
   OpenAIConfigOptions,
+  LLMConfigResult,
   UserKeyValues,
 } from '~/types';
+<<<<<<< HEAD
 import { getAzureCredentials, resolveHeaders, isUserProvided, checkUserKeyExpiry } from '~/utils';
+=======
+import { getAzureCredentials } from '~/utils/azure';
+import { isUserProvided } from '~/utils/common';
+import { resolveHeaders } from '~/utils/env';
+>>>>>>> main
 import { getOpenAIConfig } from './config';
 
 /**
@@ -18,11 +29,21 @@ import { getOpenAIConfig } from './config';
  */
 export async function initializeOpenAI({
   req,
+<<<<<<< HEAD
   endpoint,
   model_parameters,
   db,
 }: BaseInitializeParams): Promise<InitializeResultBase> {
   const appConfig = req.config;
+=======
+  appConfig,
+  overrideModel,
+  endpointOption,
+  overrideEndpoint,
+  getUserKeyValues,
+  checkUserKeyExpiry,
+}: InitializeOpenAIOptionsParams): Promise<LLMConfigResult> => {
+>>>>>>> main
   const { PROXY, OPENAI_API_KEY, AZURE_API_KEY, OPENAI_REVERSE_PROXY, AZURE_OPENAI_BASEURL } =
     process.env;
 
@@ -161,4 +182,8 @@ export async function initializeOpenAI({
   }
 
   return options;
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> main

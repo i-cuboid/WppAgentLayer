@@ -92,7 +92,10 @@ export default function Badge({
             '@container-[600px]:h-4 @container-[600px]:w-4 relative h-5 w-5',
             !label && 'mx-auto',
           )}
+<<<<<<< HEAD
           aria-hidden="true"
+=======
+>>>>>>> main
         />
       )}
       <span className="@container-[600px]:inline relative hidden">{label}</span>

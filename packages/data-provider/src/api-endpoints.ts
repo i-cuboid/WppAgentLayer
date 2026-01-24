@@ -65,8 +65,11 @@ export const messages = (params: q.MessagesListParams) => {
 };
 
 export const messagesArtifacts = (messageId: string) => `${messagesRoot}/artifact/${messageId}`;
+<<<<<<< HEAD
 
 export const messagesBranch = () => `${messagesRoot}/branch`;
+=======
+>>>>>>> main
 
 const shareRoot = `${BASE_URL}/api/share`;
 export const shareMessages = (shareId: string) => `${shareRoot}/${shareId}`;

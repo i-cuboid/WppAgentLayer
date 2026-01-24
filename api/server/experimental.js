@@ -16,7 +16,10 @@ const {
   isEnabled,
   ErrorController,
   performStartupChecks,
+<<<<<<< HEAD
   handleJsonParseError,
+=======
+>>>>>>> main
   initializeFileStorage,
 } = require('@librechat/api');
 const { connectDb, indexSync } = require('~/db');
@@ -246,6 +249,7 @@ if (cluster.isMaster) {
     app.use(noIndex);
     app.use(express.json({ limit: '3mb' }));
     app.use(express.urlencoded({ extended: true, limit: '3mb' }));
+<<<<<<< HEAD
 
     app.use(handleJsonParseError);
 
@@ -262,6 +266,8 @@ if (cluster.isMaster) {
       next();
     });
 
+=======
+>>>>>>> main
     app.use(mongoSanitize());
     app.use(cors());
     app.use(cookieParser());
@@ -301,11 +307,19 @@ if (cluster.isMaster) {
     app.use('/api/keys', routes.keys);
     app.use('/api/user', routes.user);
     app.use('/api/search', routes.search);
+<<<<<<< HEAD
+=======
+    app.use('/api/edit', routes.edit);
+>>>>>>> main
     app.use('/api/messages', routes.messages);
     app.use('/api/convos', routes.convos);
     app.use('/api/presets', routes.presets);
     app.use('/api/prompts', routes.prompts);
     app.use('/api/categories', routes.categories);
+<<<<<<< HEAD
+=======
+    app.use('/api/tokenizer', routes.tokenizer);
+>>>>>>> main
     app.use('/api/endpoints', routes.endpoints);
     app.use('/api/balance', routes.balance);
     app.use('/api/models', routes.models);
@@ -343,12 +357,16 @@ if (cluster.isMaster) {
     });
 
     /** Start listening on shared port (cluster will distribute connections) */
+<<<<<<< HEAD
     app.listen(port, host, async (err) => {
       if (err) {
         logger.error(`Worker ${process.pid} failed to start server:`, err);
         process.exit(1);
       }
 
+=======
+    app.listen(port, host, async () => {
+>>>>>>> main
       logger.info(
         `Worker ${process.pid} started: Server listening at http://${
           host == '0.0.0.0' ? 'localhost' : host

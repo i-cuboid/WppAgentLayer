@@ -45,3 +45,61 @@ export interface LLMConfigResult<T = OAIClientOptions> {
 export type OpenAIConfigResult = LLMConfigResult<OAIClientOptions> & {
   configOptions?: OpenAIConfiguration;
 };
+<<<<<<< HEAD
+=======
+
+/**
+ * Interface for user values retrieved from the database
+ */
+export interface UserKeyValues {
+  apiKey?: string;
+  baseURL?: string;
+}
+
+/**
+ * Request interface with only the properties we need (avoids Express typing conflicts)
+ */
+export interface RequestData {
+  user: {
+    id: string;
+  };
+  body: {
+    model?: string;
+    endpoint?: string;
+    key?: string;
+  };
+  app: {
+    locals: {
+      [EModelEndpoint.azureOpenAI]?: TAzureConfig;
+      [EModelEndpoint.openAI]?: TEndpoint;
+      all?: TEndpoint;
+    };
+  };
+}
+
+/**
+ * Function type for getting user key values
+ */
+export type GetUserKeyValuesFunction = (params: {
+  userId: string;
+  name: string;
+}) => Promise<UserKeyValues>;
+
+/**
+ * Function type for checking user key expiry
+ */
+export type CheckUserKeyExpiryFunction = (expiresAt: string, endpoint: string) => void;
+
+/**
+ * Parameters for the initializeOpenAI function
+ */
+export interface InitializeOpenAIOptionsParams {
+  req: RequestData;
+  appConfig: AppConfig;
+  overrideModel?: string;
+  overrideEndpoint?: string;
+  endpointOption: Partial<TEndpointOption>;
+  getUserKeyValues: GetUserKeyValuesFunction;
+  checkUserKeyExpiry: CheckUserKeyExpiryFunction;
+}
+>>>>>>> main

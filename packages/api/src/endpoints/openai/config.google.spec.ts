@@ -69,6 +69,7 @@ describe('getOpenAIConfig - Google Compatibility', () => {
         expect(result.tools).toEqual([]);
       });
 
+<<<<<<< HEAD
       it('should filter out googleSearch when web_search is only in modelOptions (not explicitly in addParams/defaultParams)', () => {
         const apiKey = JSON.stringify({ GOOGLE_API_KEY: 'test-google-key' });
         const endpoint = 'Gemini (Custom)';
@@ -89,6 +90,8 @@ describe('getOpenAIConfig - Google Compatibility', () => {
         expect(result.tools).toEqual([]);
       });
 
+=======
+>>>>>>> main
       it('should handle web_search with mixed Google and OpenAI params in addParams', () => {
         const apiKey = JSON.stringify({ GOOGLE_API_KEY: 'test-google-key' });
         const endpoint = 'Gemini (Custom)';

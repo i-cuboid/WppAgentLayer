@@ -96,7 +96,11 @@ export const ThinkingButton = memo(
                 : localize('com_ui_copy_thoughts_to_clipboard')
             }
             className={cn(
+<<<<<<< HEAD
               'rounded-lg p-1.5 text-text-secondary-alt',
+=======
+              'rounded-lg p-1.5 text-text-secondary-alt transition-colors duration-200',
+>>>>>>> main
               isExpanded
                 ? 'opacity-0 group-focus-within/thinking-container:opacity-100 group-hover/thinking-container:opacity-100'
                 : 'opacity-0',
@@ -281,6 +285,7 @@ const Thinking: React.ElementType = memo(({ children }: { children: React.ReactN
   }
 
   return (
+<<<<<<< HEAD
     <div
       ref={containerRef}
       className="group/thinking-container"
@@ -290,6 +295,10 @@ const Thinking: React.ElementType = memo(({ children }: { children: React.ReactN
       onBlur={handleBlur}
     >
       <div className="mb-4 pb-2 pt-2">
+=======
+    <div className="group/thinking-container">
+      <div className="sticky top-0 z-10 mb-4 bg-presentation pb-2 pt-2">
+>>>>>>> main
         <ThinkingButton
           isExpanded={isExpanded}
           onClick={handleClick}

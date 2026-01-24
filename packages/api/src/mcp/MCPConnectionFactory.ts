@@ -355,9 +355,13 @@ export class MCPConnectionFactory {
       /** Check if there's already an ongoing OAuth flow for this flowId */
       const existingFlow = await this.flowManager.getFlowState(flowId, 'mcp_oauth');
 
+<<<<<<< HEAD
       // If any flow exists (PENDING, COMPLETED, FAILED), cancel it and start fresh
       // This ensures the user always gets a new OAuth URL instead of waiting for stale flows
       if (existingFlow) {
+=======
+      if (existingFlow && existingFlow.status === 'PENDING') {
+>>>>>>> main
         logger.debug(
           `${this.logPrefix} Found existing OAuth flow (status: ${existingFlow.status}), cancelling to start fresh`,
         );
@@ -375,6 +379,38 @@ export class MCPConnectionFactory {
           logger.warn(`${this.logPrefix} Failed to cancel existing OAuth flow`, error);
         }
         // Continue to start a new flow below
+      }
+
+      // Clean up old completed/failed flows, but only if they're actually stale
+      // This prevents race conditions where we delete a flow that's still being processed
+      if (existingFlow && existingFlow.status !== 'PENDING') {
+        const STALE_FLOW_THRESHOLD = 2 * 60 * 1000; // 2 minutes
+        const { isStale, age, status } = await this.flowManager.isFlowStale(
+          flowId,
+          'mcp_oauth',
+          STALE_FLOW_THRESHOLD,
+        );
+
+        if (isStale) {
+          try {
+            await this.flowManager.deleteFlow(flowId, 'mcp_oauth');
+            logger.debug(
+              `${this.logPrefix} Cleared stale ${status} OAuth flow (age: ${Math.round(age / 1000)}s)`,
+            );
+          } catch (error) {
+            logger.warn(`${this.logPrefix} Failed to clear stale OAuth flow`, error);
+          }
+        } else {
+          logger.debug(
+            `${this.logPrefix} Skipping cleanup of recent ${status} flow (age: ${Math.round(age / 1000)}s, threshold: ${STALE_FLOW_THRESHOLD / 1000}s)`,
+          );
+          // If flow is recent but not pending, something might be wrong
+          if (status === 'FAILED') {
+            logger.warn(
+              `${this.logPrefix} Recent OAuth flow failed, will retry after ${Math.round((STALE_FLOW_THRESHOLD - age) / 1000)}s`,
+            );
+          }
+        }
       }
 
       logger.debug(`${this.logPrefix} Initiating new OAuth flow for ${this.serverName}...`);

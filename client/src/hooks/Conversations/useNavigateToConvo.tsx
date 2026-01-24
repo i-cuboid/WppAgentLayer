@@ -9,6 +9,7 @@ import type {
   TModelsConfig,
   TConversation,
 } from 'librechat-data-provider';
+<<<<<<< HEAD
 import {
   clearModelForNonEphemeralAgent,
   getDefaultEndpoint,
@@ -16,6 +17,9 @@ import {
   buildDefaultConvo,
   logger,
 } from '~/utils';
+=======
+import { getDefaultEndpoint, clearMessagesCache, buildDefaultConvo, logger } from '~/utils';
+>>>>>>> main
 import { useApplyModelSpecEffects } from '~/hooks/Agents';
 import store from '~/store';
 

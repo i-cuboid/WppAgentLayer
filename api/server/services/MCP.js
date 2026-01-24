@@ -320,6 +320,11 @@ async function createMCPTools({
     return;
   }
 
+  logger.debug(`[MCP][${serverName}] Creating ${result.tools.length} tools`, {
+    tools: result.tools.map(t => t.name),
+    availableToolsKeys: result.availableTools ? Object.keys(result.availableTools) : [],
+  });
+
   const serverTools = [];
   for (const tool of result.tools) {
     const toolInstance = await createMCPTool({

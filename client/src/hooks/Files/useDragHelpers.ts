@@ -8,7 +8,10 @@ import {
   Tools,
   QueryKeys,
   Constants,
+<<<<<<< HEAD
   inferMimeType,
+=======
+>>>>>>> main
   EToolResources,
   EModelEndpoint,
   mergeFileConfig,

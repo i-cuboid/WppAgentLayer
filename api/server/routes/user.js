@@ -14,8 +14,11 @@ const {
   canDeleteAccount,
   requireJwtAuth,
 } = require('~/server/middleware');
+<<<<<<< HEAD
 
 const settings = require('./settings');
+=======
+>>>>>>> main
 
 const router = express.Router();
 

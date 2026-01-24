@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 const { isUserProvided, fetchModels } = require('@librechat/api');
+=======
+const { isUserProvided } = require('@librechat/api');
+>>>>>>> main
 const {
   EModelEndpoint,
   extractEnvVariable,
   normalizeEndpointName,
 } = require('librechat-data-provider');
+<<<<<<< HEAD
+=======
+const { fetchModels } = require('~/server/services/ModelService');
+>>>>>>> main
 const { getAppConfig } = require('./app');
 
 /**

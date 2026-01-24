@@ -877,6 +877,7 @@ const bedrockGeneralCol2: SettingsConfiguration = [
   librechat.resendFiles,
   bedrock.region,
   bedrock.promptCache,
+<<<<<<< HEAD
   librechat.fileTokenLimit,
 ];
 
@@ -911,6 +912,8 @@ const bedrockMoonshotCol2: SettingsConfiguration = [
   bedrock.topP,
   librechat.resendFiles,
   bedrock.region,
+=======
+>>>>>>> main
   librechat.fileTokenLimit,
 ];
 

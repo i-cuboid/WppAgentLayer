@@ -1679,7 +1679,11 @@ describe('getOpenAIConfig', () => {
       it('should not override existing modelOptions with defaultParams', () => {
         const result = getOpenAIConfig(mockApiKey, {
           modelOptions: {
+<<<<<<< HEAD
             model: 'gpt-4',
+=======
+            model: 'gpt-5',
+>>>>>>> main
             temperature: 0.9,
           },
           customParams: {
@@ -1692,7 +1696,11 @@ describe('getOpenAIConfig', () => {
         });
 
         expect(result.llmConfig.temperature).toBe(0.9);
+<<<<<<< HEAD
         expect(result.llmConfig.maxTokens).toBe(1000);
+=======
+        expect(result.llmConfig.modelKwargs?.max_completion_tokens).toBe(1000);
+>>>>>>> main
       });
 
       it('should allow addParams to override defaultParams', () => {
@@ -1840,7 +1848,11 @@ describe('getOpenAIConfig', () => {
       it('should preserve order: defaultParams < addParams < modelOptions', () => {
         const result = getOpenAIConfig(mockApiKey, {
           modelOptions: {
+<<<<<<< HEAD
             model: 'gpt-4',
+=======
+            model: 'gpt-5',
+>>>>>>> main
             temperature: 0.9,
           },
           customParams: {
@@ -1858,7 +1870,11 @@ describe('getOpenAIConfig', () => {
 
         expect(result.llmConfig.temperature).toBe(0.9);
         expect(result.llmConfig.topP).toBe(0.8);
+<<<<<<< HEAD
         expect(result.llmConfig.maxTokens).toBe(500);
+=======
+        expect(result.llmConfig.modelKwargs?.max_completion_tokens).toBe(500);
+>>>>>>> main
       });
     });
   });

@@ -140,7 +140,10 @@ export async function createRun({
       provider,
       reasoningKey,
       agentId: agent.id,
+<<<<<<< HEAD
       name: agent.name ?? undefined,
+=======
+>>>>>>> main
       tools: agent.tools,
       clientOptions: llmConfig,
       instructions: systemContent,

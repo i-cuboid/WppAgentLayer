@@ -421,7 +421,11 @@ const setAuthTokens = async (userId, res, _session = null) => {
  * @param {string} [userId] - Optional MongoDB user ID for image path validation
  * @returns {String} - access token
  */
+<<<<<<< HEAD
 const setOpenIDAuthTokens = (tokenset, req, res, userId, existingRefreshToken) => {
+=======
+const setOpenIDAuthTokens = (tokenset, res, userId, existingRefreshToken) => {
+>>>>>>> main
   try {
     if (!tokenset) {
       logger.error('[setOpenIDAuthTokens] No tokenset found in request');
@@ -448,6 +452,7 @@ const setOpenIDAuthTokens = (tokenset, req, res, userId, existingRefreshToken) =
       return;
     }
 
+<<<<<<< HEAD
     /** Store tokens server-side in session to avoid large cookies */
     if (req.session) {
       req.session.openidTokens = {
@@ -472,6 +477,20 @@ const setOpenIDAuthTokens = (tokenset, req, res, userId, existingRefreshToken) =
     }
 
     /** Small cookie to indicate token provider (required for auth middleware) */
+=======
+    res.cookie('refreshToken', refreshToken, {
+      expires: expirationDate,
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'strict',
+    });
+    res.cookie('openid_access_token', tokenset.access_token, {
+      expires: expirationDate,
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'strict',
+    });
+>>>>>>> main
     res.cookie('token_provider', 'openid', {
       expires: expirationDate,
       httpOnly: true,

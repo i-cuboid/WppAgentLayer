@@ -8,6 +8,7 @@ import {
   WebSocketOptionsSchema,
   StreamableHTTPOptionsSchema,
 } from 'librechat-data-provider';
+<<<<<<< HEAD
 import type {
   EmbeddedResource,
   ListToolsResult,
@@ -18,6 +19,11 @@ import type {
 } from '@modelcontextprotocol/sdk/types.js';
 import type { SearchResultData, UIResource, TPlugin } from 'librechat-data-provider';
 import type { TokenMethods, JsonSchemaType, IUser } from '@librechat/data-schemas';
+=======
+import type { SearchResultData, UIResource, TPlugin } from 'librechat-data-provider';
+import type { TokenMethods, JsonSchemaType, IUser } from '@librechat/data-schemas';
+import type * as t from '@modelcontextprotocol/sdk/types.js';
+>>>>>>> main
 import type { FlowStateManager } from '~/flow/manager';
 import type { RequestBody } from '~/types/http';
 import type * as o from '~/mcp/oauth/types';
